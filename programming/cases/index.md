@@ -21,8 +21,16 @@ Feedback cases are reported incidents, not authoritative guide rules. Use them t
 
 Use this structure for new case files:
 
-```markdown
+````markdown
 # Case Title
+
+```yaml
+id: case.short-case-id
+status: reported
+summary: One sentence optimized for skimming from the index.
+tags: []
+related_rules: []
+```
 
 ## Summary
 
@@ -59,4 +67,4 @@ What makes this incident specific, uncertain, or not yet general.
 #### Possible Promotion
 
 What tier this could move to if similar feedback repeats.
-```
+````

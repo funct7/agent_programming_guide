@@ -5,12 +5,11 @@ These are high-priority rules. They should almost never be broken. If a tradeoff
 ## Domain Facts
 
 ```yaml
-kind: guide-rule
 id: core.domain-facts
 tier: core-rule
+review_passes: [substantive]
 summary: Do not invent missing domain facts or parse incidental/display strings to recover structured values.
 applies_when:
-  layers: [Domain, DataAccess, Application]
   constructs: [domain-model, data-mapping, parser, dto, api-response]
 ```
 
@@ -21,12 +20,11 @@ applies_when:
 ## Domain Boundaries
 
 ```yaml
-kind: guide-rule
 id: core.domain-boundaries
 tier: core-rule
+review_passes: [substantive]
 summary: Do not turn DTOs, endpoint payloads, or pagination wrappers into Domain; DataAccess adapts transport into Domain.
 applies_when:
-  layers: [Domain, DataAccess, Application]
   constructs: [domain-model, dto, endpoint-payload, pagination, service-mapping]
 ```
 
@@ -36,9 +34,9 @@ applies_when:
 ## State Shape
 
 ```yaml
-kind: guide-rule
 id: core.state-shape
 tier: core-rule
+review_passes: [substantive]
 summary: Prefer sum types for invalid product states and avoid duplicated boolean flags plus values for mutually exclusive states.
 applies_when:
   constructs: [state, enum, optional, boolean-flag, product-type, domain-model, feature-state, derived-value]

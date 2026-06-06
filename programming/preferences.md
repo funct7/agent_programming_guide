@@ -11,9 +11,9 @@ Preference entries may include `preference_strength` when Josh has chosen a nume
 ## Keep Type Definitions Minimal
 
 ```yaml
-kind: guide-rule
 id: preference.type-definitions-minimal
 tier: preference
+review_passes: [structural]
 summary: Keep original type declarations focused on core shape; put conformances and supporting members in extensions by default.
 applies_when:
   constructs: [type-declaration, struct, enum, protocol-conformance, nested-type, initializer]
@@ -47,9 +47,9 @@ extension Photoshoot.Availability : Equatable { }
 ## Split Files For Navigation
 
 ```yaml
-kind: guide-rule
 id: preference.split-files-for-navigation
 tier: preference
+review_passes: [structural]
 summary: Split nested types into discoverable files when they become major concepts, are widely used, or make a file hard to scan.
 applies_when:
   constructs: [file-layout, nested-type, major-type, directory, navigation]
@@ -76,9 +76,9 @@ Rationale:
 ## Initializer Calls
 
 ```yaml
-kind: guide-rule
 id: preference.initializer-calls
 tier: preference
+review_passes: [structural]
 summary: Prefer Self.init(...) over Self(...) when invoking an initializer explicitly.
 applies_when:
   language: swift
@@ -90,9 +90,9 @@ Prefer `Self.init(...)` over `Self(...)` when invoking an initializer explicitly
 ## Local Constants
 
 ```yaml
-kind: guide-rule
 id: preference.local-constants
 tier: preference
+review_passes: [substantive]
 summary: Avoid single-use local constants when the inline expression remains easy to read.
 applies_when:
   constructs: [local-constant, let-binding, control-flow, reducer]
@@ -105,9 +105,9 @@ Local constants are useful when they name a meaningful intermediate concept, avo
 ## Private Names
 
 ```yaml
-kind: guide-rule
 id: preference.private-names
 tier: preference
+review_passes: [structural]
 summary: Prefix private members and private helper types with an underscore.
 applies_when:
   language: swift
@@ -123,9 +123,9 @@ Apply this to private functions, private stored properties, private computed pro
 ## Extension Locality
 
 ```yaml
-kind: guide-rule
 id: preference.extension-locality
 tier: preference
+review_passes: [structural, substantive]
 summary: Keep single-file extension members private and near their use; use wider extensions only for real API surface.
 applies_when:
   constructs: [extension, helper, method, computed-property, api-surface]
@@ -138,12 +138,11 @@ If an extension member is used only in one file, keep it in that file and make t
 ## UI Construction
 
 ```yaml
-kind: guide-rule
 id: preference.ui-construction
 tier: preference
+review_passes: [structural, substantive]
 summary: Do not build UIKit UI programmatically when Storyboard, XIB, or SwiftUI is available; do not edit Storyboard/XIB XML unless instructed.
 applies_when:
-  layers: [Presentation]
   constructs: [UIKit, Storyboard, XIB, SwiftUI, programmatic-ui, view-controller]
 ```
 
@@ -158,9 +157,9 @@ For Storyboard and XIB files, do not directly edit the generated XML by hand or 
 ## Enum Associated Value Labels
 
 ```yaml
-kind: guide-rule
 id: preference.enum-associated-value-labels
 tier: preference
+review_passes: [structural]
 summary: Omit associated value labels when the value type makes the role clear; use labels only for disambiguation or call-site meaning.
 applies_when:
   language: swift
@@ -172,9 +171,9 @@ When an associated value's type already makes its role clear, omit the label. Pr
 ## Type Conversion APIs
 
 ```yaml
-kind: guide-rule
 id: preference.type-conversion-apis
 tier: preference
+review_passes: [substantive]
 summary: Prefer static factory APIs on the target type over computed source properties when converting between types.
 applies_when:
   constructs: [type-conversion, factory, computed-property, extension]

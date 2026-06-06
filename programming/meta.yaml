@@ -5,6 +5,10 @@ tiers:
   - preference
   - convention
   - repeated-mistake
+review_passes:
+  - structural
+  - substantive
+  - repeated-check
 preference_strength:
   type: integer
   min: 1

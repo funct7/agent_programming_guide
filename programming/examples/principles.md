@@ -5,7 +5,6 @@ Examples clarify accepted principles but do not replace them. Extract the common
 ## Q&A Modeling Case Study
 
 ```yaml
-kind: guide-example
 id: example.qna-modeling-case-study
 summary: Shows how Q&A server list/thread shapes should map into one domain inquiry concept instead of transport-shaped domain types.
 tags: []
@@ -27,7 +26,6 @@ Pagination, endpoint summaries, status strings, and answer counts are transport/
 ## Derived Authentication State
 
 ```yaml
-kind: guide-example
 id: example.derived-authentication-state
 summary: Shows how currentUserID can be the source of truth instead of storing isSignedIn beside it.
 tags: []

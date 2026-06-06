@@ -1,7 +1,6 @@
 # Dependency Injection With Over-Specific Bridge Types
 
 ```yaml
-kind: guide-case
 id: case.dependency-injection-over-specific-bridge-types
 status: reported
 summary: A feature depended on a concrete bridge type even though it only needed to observe boolean close events.

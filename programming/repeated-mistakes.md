@@ -5,9 +5,9 @@ These are recurring agent mistakes. They are not preferences or design principle
 ## Swift Explicit Returns In Multi-Statement Functions
 
 ```yaml
-kind: guide-rule
 id: repeated.swift-explicit-returns
 tier: repeated-mistake
+review_passes: [repeated-check]
 summary: In value-returning Swift functions, do not mix explicit return branches with expression-only branches in the same switch or conditional body.
 applies_when:
   language: swift

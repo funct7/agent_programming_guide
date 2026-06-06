@@ -5,12 +5,11 @@ These are default reasoning guidelines. Follow them unless local context provide
 ## Domain Modeling
 
 ```yaml
-kind: guide-rule
 id: principle.domain-modeling
 tier: principle
+review_passes: [substantive]
 summary: Model Domain from the business/resource concept, not one server response, screen shape, pagination, or duplicated metadata.
 applies_when:
-  layers: [Domain, DataAccess, Application]
   constructs: [domain-model, entity, value-object, api-response, dto, pagination]
 ```
 
@@ -34,9 +33,9 @@ Do not start from:
 ## Practical Compromise
 
 ```yaml
-kind: guide-rule
 id: principle.practical-compromise
 tier: principle
+review_passes: [substantive]
 summary: Make compromises explicit; omit unavailable facts instead of filling idealized fields from brittle sources.
 applies_when:
   constructs: [domain-model, api-gap, data-mapping, server-response, compromise]
@@ -54,9 +53,9 @@ Compromises are fine when they are explicit:
 ## Derived Values
 
 ```yaml
-kind: guide-rule
 id: principle.derived-values
 tier: principle
+review_passes: [substantive]
 summary: Avoid storing fields that merely summarize richer model data already present when contradictions could result.
 applies_when:
   constructs: [state, domain-model, status, count, flag, derived-value]
@@ -69,9 +68,9 @@ Examples: status, count, or availability fields may be better derived from the m
 ## Sentinel Values
 
 ```yaml
-kind: guide-rule
 id: principle.sentinel-values
 tier: principle
+review_passes: [substantive]
 summary: Sentinel values are acceptable only when they have one clear meaning, are impossible as real data, and are named in one place.
 applies_when:
   constructs: [sentinel, placeholder, missing-data, domain-model, feature-state]
@@ -92,9 +91,9 @@ Do not use sentinel values when they hide missing domain facts in a broad or amb
 ## Modeling By Change Boundaries
 
 ```yaml
-kind: guide-rule
 id: principle.modeling-by-change-boundaries
 tier: principle
+review_passes: [substantive]
 summary: Group values that change together and separate values with independent lifecycles.
 applies_when:
   constructs: [state, context, model, struct, enum, child-feature, lifecycle]
@@ -116,12 +115,11 @@ Do not flatten unrelated values into one type just because one screen or workflo
 ## Feature State Modeling
 
 ```yaml
-kind: guide-rule
 id: principle.feature-state-modeling
 tier: principle
+review_passes: [substantive]
 summary: Organize feature state around lifecycle and user-visible modes, not flat optional property bags.
 applies_when:
-  layers: [Application, Presentation]
   constructs: [feature-state, state-machine, child-feature, sheet, modal, optional-state]
 ```
 
@@ -136,12 +134,11 @@ When a sub-flow has its own lifecycle, inputs, validation, submission, or presen
 ## State Machine Reducers
 
 ```yaml
-kind: guide-rule
 id: principle.state-machine-reducers
 tier: principle
+review_passes: [structural, substantive]
 summary: Prefer switching on the state/input or state/event tuple so legal transitions and invalid inputs are visible.
 applies_when:
-  layers: [Application]
   constructs: [state-machine, reducer, input, event, transition]
 ```
 
@@ -152,9 +149,9 @@ Avoid switching only on input and then checking state inside each case when the 
 ## Default Values
 
 ```yaml
-kind: guide-rule
 id: principle.default-values
 tier: principle
+review_passes: [substantive]
 summary: Default arguments and values communicate meaning; use them only when the omitted value is normal, dominant, or safe.
 applies_when:
   constructs: [default-argument, default-value, initializer, factory, form, state]
@@ -167,9 +164,9 @@ Do not use defaults to hide incomplete data, temporary API gaps, or context-spec
 ## Optional Values
 
 ```yaml
-kind: guide-rule
 id: principle.optional-values
 tier: principle
+review_passes: [substantive]
 summary: Use optionals for legitimate absence, not invalid input, illegal state, failed construction, or hidden errors.
 applies_when:
   constructs: [optional, initializer, factory, parser, validation, construction, error]
@@ -184,9 +181,9 @@ Optional is appropriate when `nil` is a valid domain or state meaning. It is not
 ## Control Flow Readability
 
 ```yaml
-kind: guide-rule
 id: principle.control-flow-readability
 tier: principle
+review_passes: [substantive]
 summary: Prefer statements that express one coherent idea; do not compress unrelated extraction, validity, authorization, and no-op checks.
 applies_when:
   constructs: [guard, if, switch, boolean-expression, reducer, control-flow]
@@ -205,9 +202,9 @@ Examples:
 ## Helper API Justification
 
 ```yaml
-kind: guide-rule
 id: principle.helper-api-justification
 tier: principle
+review_passes: [substantive]
 summary: Introduce helper APIs only when they carry semantic weight, remove meaningful duplication, or clarify the caller.
 applies_when:
   constructs: [helper, extension, computed-property, method, factory, api-surface]
@@ -220,9 +217,9 @@ A helper is justified when it names a meaningful operation, removes meaningful d
 ## Examples Are Not Rules
 
 ```yaml
-kind: guide-rule
 id: principle.examples-are-not-rules
 tier: principle
+review_passes: [substantive]
 summary: Examples clarify guidance but are not exhaustive checklists and should not be applied blindly.
 applies_when:
   constructs: [example, case-study, guide-update, code-feedback]

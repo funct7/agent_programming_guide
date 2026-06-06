@@ -4,12 +4,13 @@ generated: true
 guide_root: "/Users/josh/.agent-guides/programming"
 usage:
   order:
-  - minimal_target_scan
-  - catalog_rule_selection
-  - read_matching_sources
+  - define_review_target
+  - detect_target_language_files_and_constructs
+  - structural_pass
+  - substantive_pass
+  - repeated_check_pass
   - read_project_local_guidance_if_declared
-  - inspect_code_or_apply_change
-  - revisit_catalog_if_new_constructs_appear
+  - report_findings_and_change_briefs
   priority:
   - core-rule
   - principle
@@ -22,16 +23,49 @@ usage:
   - Feedback cases are non-authoritative and are intentionally not listed as rules.
   - Project-local guides are read after this global guide and are additions or scoped
     exceptions, not duplicates.
+rules_by_review_pass:
+  structural:
+  - principle.state-machine-reducers
+  - preference.type-definitions-minimal
+  - preference.split-files-for-navigation
+  - preference.initializer-calls
+  - preference.private-names
+  - preference.extension-locality
+  - preference.ui-construction
+  - preference.enum-associated-value-labels
+  - swift.synthesize-first
+  - swift.public-concrete-type-construction
+  - swift.factory-naming
+  substantive:
+  - core.domain-facts
+  - core.domain-boundaries
+  - core.state-shape
+  - principle.domain-modeling
+  - principle.practical-compromise
+  - principle.derived-values
+  - principle.sentinel-values
+  - principle.modeling-by-change-boundaries
+  - principle.feature-state-modeling
+  - principle.state-machine-reducers
+  - principle.default-values
+  - principle.optional-values
+  - principle.control-flow-readability
+  - principle.helper-api-justification
+  - principle.examples-are-not-rules
+  - preference.local-constants
+  - preference.extension-locality
+  - preference.ui-construction
+  - preference.type-conversion-apis
+  repeated-check:
+  - repeated.swift-explicit-returns
 rules:
 - id: core.domain-facts
   tier: core-rule
+  review_passes:
+  - substantive
   summary: Do not invent missing domain facts or parse incidental/display strings
     to recover structured values.
   applies_when:
-    layers:
-    - Domain
-    - DataAccess
-    - Application
     constructs:
     - domain-model
     - data-mapping
@@ -42,13 +76,11 @@ rules:
   source: core-rules.md#domain-facts
 - id: core.domain-boundaries
   tier: core-rule
+  review_passes:
+  - substantive
   summary: Do not turn DTOs, endpoint payloads, or pagination wrappers into Domain;
     DataAccess adapts transport into Domain.
   applies_when:
-    layers:
-    - Domain
-    - DataAccess
-    - Application
     constructs:
     - domain-model
     - dto
@@ -59,6 +91,8 @@ rules:
   source: core-rules.md#domain-boundaries
 - id: core.state-shape
   tier: core-rule
+  review_passes:
+  - substantive
   summary: Prefer sum types for invalid product states and avoid duplicated boolean
     flags plus values for mutually exclusive states.
   applies_when:
@@ -75,13 +109,11 @@ rules:
   source: core-rules.md#state-shape
 - id: principle.domain-modeling
   tier: principle
+  review_passes:
+  - substantive
   summary: Model Domain from the business/resource concept, not one server response,
     screen shape, pagination, or duplicated metadata.
   applies_when:
-    layers:
-    - Domain
-    - DataAccess
-    - Application
     constructs:
     - domain-model
     - entity
@@ -93,6 +125,8 @@ rules:
   source: principles.md#domain-modeling
 - id: principle.practical-compromise
   tier: principle
+  review_passes:
+  - substantive
   summary: Make compromises explicit; omit unavailable facts instead of filling idealized
     fields from brittle sources.
   applies_when:
@@ -106,6 +140,8 @@ rules:
   source: principles.md#practical-compromise
 - id: principle.derived-values
   tier: principle
+  review_passes:
+  - substantive
   summary: Avoid storing fields that merely summarize richer model data already present
     when contradictions could result.
   applies_when:
@@ -120,6 +156,8 @@ rules:
   source: principles.md#derived-values
 - id: principle.sentinel-values
   tier: principle
+  review_passes:
+  - substantive
   summary: Sentinel values are acceptable only when they have one clear meaning, are
     impossible as real data, and are named in one place.
   applies_when:
@@ -133,6 +171,8 @@ rules:
   source: principles.md#sentinel-values
 - id: principle.modeling-by-change-boundaries
   tier: principle
+  review_passes:
+  - substantive
   summary: Group values that change together and separate values with independent
     lifecycles.
   applies_when:
@@ -148,12 +188,11 @@ rules:
   source: principles.md#modeling-by-change-boundaries
 - id: principle.feature-state-modeling
   tier: principle
+  review_passes:
+  - substantive
   summary: Organize feature state around lifecycle and user-visible modes, not flat
     optional property bags.
   applies_when:
-    layers:
-    - Application
-    - Presentation
     constructs:
     - feature-state
     - state-machine
@@ -165,11 +204,12 @@ rules:
   source: principles.md#feature-state-modeling
 - id: principle.state-machine-reducers
   tier: principle
+  review_passes:
+  - structural
+  - substantive
   summary: Prefer switching on the state/input or state/event tuple so legal transitions
     and invalid inputs are visible.
   applies_when:
-    layers:
-    - Application
     constructs:
     - state-machine
     - reducer
@@ -180,6 +220,8 @@ rules:
   source: principles.md#state-machine-reducers
 - id: principle.default-values
   tier: principle
+  review_passes:
+  - substantive
   summary: Default arguments and values communicate meaning; use them only when the
     omitted value is normal, dominant, or safe.
   applies_when:
@@ -194,6 +236,8 @@ rules:
   source: principles.md#default-values
 - id: principle.optional-values
   tier: principle
+  review_passes:
+  - substantive
   summary: Use optionals for legitimate absence, not invalid input, illegal state,
     failed construction, or hidden errors.
   applies_when:
@@ -209,6 +253,8 @@ rules:
   source: principles.md#optional-values
 - id: principle.control-flow-readability
   tier: principle
+  review_passes:
+  - substantive
   summary: Prefer statements that express one coherent idea; do not compress unrelated
     extraction, validity, authorization, and no-op checks.
   applies_when:
@@ -223,6 +269,8 @@ rules:
   source: principles.md#control-flow-readability
 - id: principle.helper-api-justification
   tier: principle
+  review_passes:
+  - substantive
   summary: Introduce helper APIs only when they carry semantic weight, remove meaningful
     duplication, or clarify the caller.
   applies_when:
@@ -237,6 +285,8 @@ rules:
   source: principles.md#helper-api-justification
 - id: principle.examples-are-not-rules
   tier: principle
+  review_passes:
+  - substantive
   summary: Examples clarify guidance but are not exhaustive checklists and should
     not be applied blindly.
   applies_when:
@@ -249,6 +299,8 @@ rules:
   source: principles.md#examples-are-not-rules
 - id: preference.type-definitions-minimal
   tier: preference
+  review_passes:
+  - structural
   summary: Keep original type declarations focused on core shape; put conformances
     and supporting members in extensions by default.
   applies_when:
@@ -263,6 +315,8 @@ rules:
   source: preferences.md#keep-type-definitions-minimal
 - id: preference.split-files-for-navigation
   tier: preference
+  review_passes:
+  - structural
   summary: Split nested types into discoverable files when they become major concepts,
     are widely used, or make a file hard to scan.
   applies_when:
@@ -276,6 +330,8 @@ rules:
   source: preferences.md#split-files-for-navigation
 - id: preference.initializer-calls
   tier: preference
+  review_passes:
+  - structural
   summary: Prefer Self.init(...) over Self(...) when invoking an initializer explicitly.
   applies_when:
     language: swift
@@ -286,6 +342,8 @@ rules:
   source: preferences.md#initializer-calls
 - id: preference.local-constants
   tier: preference
+  review_passes:
+  - substantive
   summary: Avoid single-use local constants when the inline expression remains easy
     to read.
   applies_when:
@@ -298,6 +356,8 @@ rules:
   source: preferences.md#local-constants
 - id: preference.private-names
   tier: preference
+  review_passes:
+  - structural
   summary: Prefix private members and private helper types with an underscore.
   applies_when:
     language: swift
@@ -310,6 +370,9 @@ rules:
   source: preferences.md#private-names
 - id: preference.extension-locality
   tier: preference
+  review_passes:
+  - structural
+  - substantive
   summary: Keep single-file extension members private and near their use; use wider
     extensions only for real API surface.
   applies_when:
@@ -323,11 +386,12 @@ rules:
   source: preferences.md#extension-locality
 - id: preference.ui-construction
   tier: preference
+  review_passes:
+  - structural
+  - substantive
   summary: Do not build UIKit UI programmatically when Storyboard, XIB, or SwiftUI
     is available; do not edit Storyboard/XIB XML unless instructed.
   applies_when:
-    layers:
-    - Presentation
     constructs:
     - UIKit
     - Storyboard
@@ -339,6 +403,8 @@ rules:
   source: preferences.md#ui-construction
 - id: preference.enum-associated-value-labels
   tier: preference
+  review_passes:
+  - structural
   summary: Omit associated value labels when the value type makes the role clear;
     use labels only for disambiguation or call-site meaning.
   applies_when:
@@ -351,6 +417,8 @@ rules:
   source: preferences.md#enum-associated-value-labels
 - id: preference.type-conversion-apis
   tier: preference
+  review_passes:
+  - substantive
   summary: Prefer static factory APIs on the target type over computed source properties
     when converting between types.
   applies_when:
@@ -363,6 +431,8 @@ rules:
   source: preferences.md#type-conversion-apis
 - id: repeated.swift-explicit-returns
   tier: repeated-mistake
+  review_passes:
+  - repeated-check
   summary: In value-returning Swift functions, do not mix explicit return branches
     with expression-only branches in the same switch or conditional body.
   applies_when:
@@ -382,6 +452,8 @@ rules:
   source: repeated-mistakes.md#swift-explicit-returns-in-multi-statement-functions
 - id: swift.synthesize-first
   tier: convention
+  review_passes:
+  - structural
   summary: Use compiler-synthesized code whenever possible; write custom implementations
     only for specific behavior.
   tags: []
@@ -393,10 +465,12 @@ rules:
     - Equatable
     - synthesized-code
   source: languages/swift.md#synthesize-first
-- id: swift.public-struct-construction
+- id: swift.public-concrete-type-construction
   tier: convention
-  summary: For public structs, preserve synthesized construction; expose public static
-    factories instead of public init unless specifically justified.
+  review_passes:
+  - structural
+  summary: For public concrete Swift types, preserve synthesized construction when
+    possible and avoid public init unless specifically justified.
   tags:
   - swift-lang
   - constructor
@@ -405,18 +479,24 @@ rules:
   applies_when:
     language: swift
     constructs:
+    - public-type
     - public-struct
+    - public-class
     - initializer
     - public-api
     - factory
   mechanical_check:
     search_terms:
     - public struct
+    - public final class
+    - public class
     - public init
     - static func make
-  source: languages/swift.md#public-struct-construction
+  source: languages/swift.md#public-concrete-type-construction
 - id: swift.factory-naming
   tier: convention
+  review_passes:
+  - structural
   summary: Use make for regular construction, from for conversion, and get for retrieval
     where reuse may be meaningful.
   tags: []

@@ -5,7 +5,6 @@ Examples clarify accepted core rules but do not replace them. Extract the common
 ## Product Type vs Sum Type
 
 ```yaml
-kind: guide-example
 id: example.product-type-vs-sum-type
 summary: Shows how a product type can represent invalid states and how a sum type removes the invalid combinations.
 tags: []

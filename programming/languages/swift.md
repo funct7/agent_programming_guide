@@ -3,9 +3,9 @@
 ## Synthesize First
 
 ```yaml
-kind: guide-rule
 id: swift.synthesize-first
 tier: convention
+review_passes: [structural]
 summary: Use compiler-synthesized code whenever possible; write custom implementations only for specific behavior.
 tags: []
 applies_when:
@@ -32,26 +32,26 @@ Examples of when custom code is justified:
 
 If none of those apply, prefer the synthesized form.
 
-## Public Struct Construction
+## Public Concrete Type Construction
 
 ```yaml
-kind: guide-rule
-id: swift.public-struct-construction
+id: swift.public-concrete-type-construction
 tier: convention
-summary: For public structs, preserve synthesized construction; expose public static factories instead of public init unless specifically justified.
+review_passes: [structural]
+summary: For public concrete Swift types, preserve synthesized construction when possible and avoid public init unless specifically justified.
 tags: [swift-lang, constructor, type, access-level]
 applies_when:
   language: swift
-  constructs: [public-struct, initializer, public-api, factory]
+  constructs: [public-type, public-struct, public-class, initializer, public-api, factory]
 mechanical_check:
-  search_terms: ["public struct", "public init", "static func make"]
+  search_terms: ["public struct", "public final class", "public class", "public init", "static func make"]
 ```
 
-For `public struct`, prefer preserving synthesized construction behavior instead of exposing a custom `public init(...)` by default.
+For public concrete Swift types, prefer preserving synthesized construction behavior instead of exposing a custom `public init(...)` by default.
 
 When a public construction API is needed, prefer a `public static` factory method over a `public init(...)`.
 
-This is especially useful because adding a custom initializer prevents the compiler from providing the synthesized memberwise initializer.
+This is especially important for `public struct` because adding a custom initializer prevents the compiler from providing the synthesized memberwise initializer. For public concrete classes, the concern is API surface: callers should not get direct construction unless that is deliberately part of the type's contract.
 
 Preferred pattern:
 - keep the struct definition as simple as possible
@@ -62,9 +62,9 @@ Preferred pattern:
 ## Factory Naming
 
 ```yaml
-kind: guide-rule
 id: swift.factory-naming
 tier: convention
+review_passes: [structural]
 summary: Use make for regular construction, from for conversion, and get for retrieval where reuse may be meaningful.
 tags: []
 applies_when:
