@@ -2,6 +2,17 @@
 
 ## Synthesize First
 
+```yaml
+kind: guide-rule
+id: swift.synthesize-first
+tier: convention
+summary: Use compiler-synthesized code whenever possible; write custom implementations only for specific behavior.
+tags: []
+applies_when:
+  language: swift
+  constructs: [initializer, protocol-conformance, Equatable, synthesized-code]
+```
+
 Rule of thumb: use compiler-synthesized code whenever possible.
 
 Apply this preference to:
@@ -23,6 +34,19 @@ If none of those apply, prefer the synthesized form.
 
 ## Public Struct Construction
 
+```yaml
+kind: guide-rule
+id: swift.public-struct-construction
+tier: convention
+summary: For public structs, preserve synthesized construction; expose public static factories instead of public init unless specifically justified.
+tags: [swift-lang, constructor, type, access-level]
+applies_when:
+  language: swift
+  constructs: [public-struct, initializer, public-api, factory]
+mechanical_check:
+  search_terms: ["public struct", "public init", "static func make"]
+```
+
 For `public struct`, prefer preserving synthesized construction behavior instead of exposing a custom `public init(...)` by default.
 
 When a public construction API is needed, prefer a `public static` factory method over a `public init(...)`.
@@ -36,6 +60,17 @@ Preferred pattern:
 - only add a custom initializer when there is a specific need that cannot be expressed cleanly otherwise
 
 ## Factory Naming
+
+```yaml
+kind: guide-rule
+id: swift.factory-naming
+tier: convention
+summary: Use make for regular construction, from for conversion, and get for retrieval where reuse may be meaningful.
+tags: []
+applies_when:
+  language: swift
+  constructs: [factory, construction, conversion, retrieval]
+```
 
 Use these names consistently:
 - `make`: regular construction

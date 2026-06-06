@@ -1,0 +1,18 @@
+version: 1
+tiers:
+  - core-rule
+  - principle
+  - preference
+  - convention
+  - repeated-mistake
+preference_strength:
+  type: integer
+  min: 1
+  max: 10
+tags:
+  - access-level
+  - constructor
+  - swift-lang
+  - type
+case_statuses:
+  - reported
