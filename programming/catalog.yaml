@@ -36,6 +36,7 @@ rules_by_review_pass:
   - swift.synthesize-first
   - swift.public-concrete-type-construction
   - swift.factory-naming
+  - swift.optional-presence-binding
   substantive:
   - core.domain-facts
   - core.domain-boundaries
@@ -508,3 +509,18 @@ rules:
     - conversion
     - retrieval
   source: languages/swift.md#factory-naming
+- id: swift.optional-presence-binding
+  tier: preference
+  review_passes:
+  - structural
+  summary: Prefer optional binding over direct nil comparison when checking optional
+    presence.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - optional
+    - condition
+    - binding
+  source: languages/swift.md#optional-presence-binding

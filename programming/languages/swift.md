@@ -80,3 +80,36 @@ Use these names consistently:
 ### Note On `get`
 
 `get` should communicate retrieval rather than guaranteed allocation. Use it only when returning an existing, cached, shared, or otherwise non-new instance is a meaningful part of the API semantics.
+
+## Optional Presence Binding
+
+```yaml
+id: swift.optional-presence-binding
+tier: preference
+review_passes: [structural]
+summary: Prefer optional binding over direct nil comparison when checking optional presence.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [optional, condition, binding]
+```
+
+Medium preference: when checking whether an optional value exists, prefer optional binding over direct nil comparison when in doubt.
+
+Prefer:
+
+```swift
+if let _ = store.state.qna.currentUserID {
+    ...
+}
+```
+
+Over:
+
+```swift
+if store.state.qna.currentUserID != nil {
+    ...
+}
+```
+
+This is a readability preference, not a correctness rule. Use judgment when a direct nil comparison is materially clearer in local context.
