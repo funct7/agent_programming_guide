@@ -52,6 +52,7 @@ rules_by_review_pass:
   - principle.optional-values
   - principle.control-flow-readability
   - principle.helper-api-justification
+  - principle.presentation-transforms
   - principle.examples-are-not-rules
   - preference.local-constants
   - preference.extension-locality
@@ -284,6 +285,22 @@ rules:
     - api-surface
   tags: []
   source: principles.md#helper-api-justification
+- id: principle.presentation-transforms
+  tier: principle
+  review_passes:
+  - substantive
+  summary: Centralize repeated domain-to-presentation transforms instead of duplicating
+    display logic.
+  applies_when:
+    constructs:
+    - ui-model
+    - presentation
+    - domain-model
+    - transform
+    - computed-property
+    - presenter
+  tags: []
+  source: principles.md#centralized-presentation-transforms
 - id: principle.examples-are-not-rules
   tier: principle
   review_passes:

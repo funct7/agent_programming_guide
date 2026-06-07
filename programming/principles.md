@@ -214,6 +214,23 @@ Only introduce a helper method, computed property, or extension member when it c
 
 A helper is justified when it names a meaningful operation, removes meaningful duplication, isolates non-trivial transformation, or improves the caller. If it is used only once and does not clarify the caller, prefer inlining it.
 
+## Centralized Presentation Transforms
+
+```yaml
+id: principle.presentation-transforms
+tier: principle
+review_passes: [substantive]
+summary: Centralize repeated domain-to-presentation transforms instead of duplicating display logic.
+applies_when:
+  constructs: [ui-model, presentation, domain-model, transform, computed-property, presenter]
+```
+
+When the same domain value is transformed into presentation data in multiple places, centralize the transform instead of repeating equivalent logic.
+
+If the transform is simple and has one clear presentation shape, a computed property or extension is usually enough. If the same domain value needs multiple presentation shapes in different UI contexts, prefer a presenter so similarly named computed properties do not pile up and obscure intent.
+
+Presentation data can be any UI-facing representation: text, imagery, numbers, formatting decisions, or a richer view model. These are examples, not limits on the principle.
+
 ## Examples Are Not Rules
 
 ```yaml
