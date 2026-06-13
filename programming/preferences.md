@@ -98,7 +98,7 @@ applies_when:
   constructs: [local-constant, let-binding, control-flow, reducer]
 ```
 
-Strong preference: avoid introducing a local constant when the value is used only once and the inline expression remains easy to read.
+Code convention: avoid introducing a local constant when the value is used only once and the inline expression remains easy to read.
 
 Local constants are useful when they name a meaningful intermediate concept, avoid duplicated work, clarify a complicated expression, or help separate distinct steps. Do not add them mechanically for short single-use expressions.
 
@@ -114,7 +114,7 @@ applies_when:
   constructs: [private-member, private-type, helper, dependency-key]
 ```
 
-Strong preference: prefix private members and private helper types with `_`.
+Code convention: prefix private members and private helper types with `_`.
 
 The underscore is not decoration. It makes the access boundary visible at call sites and helps readers reason about whether a member or type is part of the surrounding type's external surface.
 
@@ -131,7 +131,7 @@ applies_when:
   constructs: [extension, helper, method, computed-property, api-surface]
 ```
 
-Strong preference: place extension members near their use when they are only used locally.
+Code convention: place extension members near their use when they are only used locally.
 
 If an extension member is used only in one file, keep it in that file and make the extension private. Use public or internal extensions in separate files only when the member is genuinely part of the wider API surface or is used across multiple files.
 
@@ -146,7 +146,7 @@ applies_when:
   constructs: [UIKit, Storyboard, XIB, SwiftUI, programmatic-ui, view-controller]
 ```
 
-Strong preference: do not build UIKit UI programmatically when Storyboard, XIB, or SwiftUI is available.
+Code convention: do not build UIKit UI programmatically when Storyboard, XIB, or SwiftUI is available.
 
 Default to visual UI construction because the resulting layout is easier to inspect directly, and because splitting a UIKit screen between Interface Builder and programmatic view setup makes the screen harder to understand. For UIKit screens that already use Interface Builder, put as much static layout information in Storyboard or XIB as is reasonable. Prefer SwiftUI when the UI is self-contained enough to be hosted from UIKit.
 
