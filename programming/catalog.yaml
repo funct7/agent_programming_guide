@@ -461,11 +461,15 @@ rules:
     - return
     - reducer
     - transition
+    - factory
+    - conversion
   mechanical_check:
     search_terms:
     - 'return '
     - switch
     - 'case '
+    - ".make"
+    - ".from"
   tags: []
   source: repeated-mistakes.md#swift-explicit-returns-in-multi-statement-functions
 - id: swift.synthesize-first
