@@ -32,6 +32,7 @@ Read project-local guidance after the global guide. Treat it as local additions 
 ## Language-Specific Guides
 
 - [Swift Language Programming Guide](./languages/swift.md)
+- [SwiftUI Programming Guide](./languages/swiftui.md)
 
 ## Supporting Material
 

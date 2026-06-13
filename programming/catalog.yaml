@@ -37,6 +37,7 @@ rules_by_review_pass:
   - swift.public-concrete-type-construction
   - swift.factory-naming
   - swift.optional-presence-binding
+  - swiftui.button-hit-area
   substantive:
   - core.domain-facts
   - core.domain-boundaries
@@ -545,3 +546,19 @@ rules:
     - condition
     - binding
   source: languages/swift.md#optional-presence-binding
+- id: swiftui.button-hit-area
+  tier: convention
+  review_passes:
+  - structural
+  summary: Make the intended whole button surface tappable by sizing the Button label
+    to fill that surface.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - SwiftUI
+    - Button
+    - hit-area
+    - layout
+  source: languages/swiftui.md#button-hit-area
