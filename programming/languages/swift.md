@@ -81,6 +81,25 @@ Use these names consistently:
 
 `get` should communicate retrieval rather than guaranteed allocation. Use it only when returning an existing, cached, shared, or otherwise non-new instance is a meaningful part of the API semantics.
 
+## Positive Boolean Naming
+
+```yaml
+id: swift.positive-boolean-naming
+tier: convention
+review_passes: [structural, substantive]
+summary: Prefer positive Boolean property and method names unless the negative state is the expected default being queried.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [boolean, property, method, computed-property, predicate]
+mechanical_check:
+  search_terms: ["isInvalid", "isNot", "hasNo", "shouldNot", "cannot"]
+```
+
+Prefer positive Boolean property and method names.
+
+Avoid negative names such as `isInvalid`, `isNotReady`, or `hasNoItems` unless the negative state is the expected or default domain state being queried. Positive names keep call sites easier to read, especially when a condition must be negated.
+
 ## Helper Method Placement
 
 ```yaml

@@ -36,6 +36,7 @@ rules_by_review_pass:
   - swift.synthesize-first
   - swift.public-concrete-type-construction
   - swift.factory-naming
+  - swift.positive-boolean-naming
   - swift.helper-method-placement
   - swift.explicit-existentials
   - swift.optional-presence-binding
@@ -61,6 +62,7 @@ rules_by_review_pass:
   - preference.extension-locality
   - preference.ui-construction
   - preference.type-conversion-apis
+  - swift.positive-boolean-naming
   - swift.helper-method-placement
   repeated-check:
   - repeated.swift-explicit-returns
@@ -585,6 +587,31 @@ rules:
     - conversion
     - retrieval
   source: languages/swift.md#factory-naming
+- id: swift.positive-boolean-naming
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Prefer positive Boolean property and method names unless the negative state
+    is the expected default being queried.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - boolean
+    - property
+    - method
+    - computed-property
+    - predicate
+  mechanical_check:
+    search_terms:
+    - isInvalid
+    - isNot
+    - hasNo
+    - shouldNot
+    - cannot
+  source: languages/swift.md#positive-boolean-naming
 - id: swift.helper-method-placement
   tier: convention
   review_passes:
