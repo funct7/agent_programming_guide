@@ -11,3 +11,11 @@ cases:
   tags: []
   related_rules: []
   source: cases/dependency-injection-over-specific-bridge-types.md
+- id: case.public-domain-extension-for-local-helper
+  status: reported
+  summary: A local use-case helper was added as a public domain type extension even
+    though it was not domain-level API.
+  tags: []
+  related_rules:
+  - preference.extension-locality
+  source: cases/public-domain-extension-for-local-helper.md
