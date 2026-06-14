@@ -36,6 +36,7 @@ rules_by_review_pass:
   - swift.synthesize-first
   - swift.public-concrete-type-construction
   - swift.factory-naming
+  - swift.helper-method-placement
   - swift.optional-presence-binding
   - swiftui.button-hit-area
   substantive:
@@ -59,8 +60,11 @@ rules_by_review_pass:
   - preference.extension-locality
   - preference.ui-construction
   - preference.type-conversion-apis
+  - swift.helper-method-placement
   repeated-check:
   - repeated.swift-explicit-returns
+  - repeated.misplaced-helper-methods-on-caller
+  - repeated.duplicating-existing-local-utility-apis
 rules:
 - id: core.domain-facts
   tier: core-rule
@@ -473,6 +477,55 @@ rules:
     - ".from"
   tags: []
   source: repeated-mistakes.md#swift-explicit-returns-in-multi-statement-functions
+- id: repeated.misplaced-helper-methods-on-caller
+  tier: repeated-mistake
+  review_passes:
+  - repeated-check
+  summary: Do not put helper methods on the current caller when the receiver type
+    is not involved in the logic.
+  applies_when:
+    constructs:
+    - helper
+    - method
+    - extension
+    - service
+    - domain-model
+    - factory
+    - conversion
+  mechanical_check:
+    search_terms:
+    - private extension
+    - func _make
+    - func _create
+    - func _from
+    - Self.init
+    - ".make("
+  tags: []
+  source: repeated-mistakes.md#misplaced-helper-methods-on-the-caller
+- id: repeated.duplicating-existing-local-utility-apis
+  tier: repeated-mistake
+  review_passes:
+  - repeated-check
+  summary: Search project and in-workspace dependencies before adding generic utility
+    helpers.
+  applies_when:
+    constructs:
+    - helper
+    - utility
+    - extension
+    - predicate
+    - string
+    - collection
+  mechanical_check:
+    search_terms:
+    - isBlank
+    - isNotBlank
+    - isEmpty
+    - trimmingCharacters
+    - private func _is
+    - private var _is
+  tags: []
+  source: repeated-mistakes.md#duplicating-existing-local-utility-apis
 - id: swift.synthesize-first
   tier: convention
   review_passes:
@@ -531,6 +584,34 @@ rules:
     - conversion
     - retrieval
   source: languages/swift.md#factory-naming
+- id: swift.helper-method-placement
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Put helper methods on the type that owns the logic, not merely on the current
+    caller.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - helper
+    - method
+    - extension
+    - service
+    - domain-model
+    - factory
+    - conversion
+  mechanical_check:
+    search_terms:
+    - private extension
+    - func _make
+    - func _create
+    - func _from
+    - Self.init
+    - ".make("
+  source: languages/swift.md#helper-method-placement
 - id: swift.optional-presence-binding
   tier: preference
   review_passes:

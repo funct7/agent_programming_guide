@@ -3,6 +3,13 @@ version: 1
 generated: true
 guide_root: "/Users/josh/.agent-guides/programming"
 examples:
+- id: example.helper-method-on-target-type
+  summary: Shows that helper methods that only reconstruct a target type should not
+    be placed on the current caller.
+  tags: []
+  illustrates:
+  - swift.helper-method-placement
+  source: examples/conventions.md#helper-method-on-target-type
 - id: example.product-type-vs-sum-type
   summary: Shows how a product type can represent invalid states and how a sum type
     removes the invalid combinations.

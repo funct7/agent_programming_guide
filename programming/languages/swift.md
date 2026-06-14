@@ -81,6 +81,25 @@ Use these names consistently:
 
 `get` should communicate retrieval rather than guaranteed allocation. Use it only when returning an existing, cached, shared, or otherwise non-new instance is a meaningful part of the API semantics.
 
+## Helper Method Placement
+
+```yaml
+id: swift.helper-method-placement
+tier: convention
+review_passes: [structural, substantive]
+summary: Put helper methods on the type that owns the logic, not merely on the current caller.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [helper, method, extension, service, domain-model, factory, conversion]
+mechanical_check:
+  search_terms: ["private extension", "func _make", "func _create", "func _from", "Self.init", ".make("]
+```
+
+Put helper methods on the type that owns the logic, not merely on the type that currently calls the helper.
+
+If a helper only constructs, copies, transforms, validates, or derives values for a specific target type from parameters, prefer placing it on that target type or inlining it. Keep a helper on a service, use case, view model, or other caller type only when that caller's own state, dependencies, invariants, lifecycle, or orchestration policy are meaningfully involved.
+
 ## Optional Presence Binding
 
 ```yaml
