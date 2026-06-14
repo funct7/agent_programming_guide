@@ -37,6 +37,7 @@ rules_by_review_pass:
   - swift.public-concrete-type-construction
   - swift.factory-naming
   - swift.helper-method-placement
+  - swift.explicit-existentials
   - swift.optional-presence-binding
   - swiftui.button-hit-area
   substantive:
@@ -612,6 +613,29 @@ rules:
     - Self.init
     - ".make("
   source: languages/swift.md#helper-method-placement
+- id: swift.explicit-existentials
+  tier: convention
+  review_passes:
+  - structural
+  summary: Use any when a value stores or accepts an interface existential rather
+    than a concrete type.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - protocol
+    - existential
+    - property
+    - parameter
+    - dependency-injection
+  mechanical_check:
+    search_terms:
+    - private let _
+    - public init
+    - protocol
+    - ": AnyObject"
+  source: languages/swift.md#explicit-existentials
 - id: swift.optional-presence-binding
   tier: preference
   review_passes:

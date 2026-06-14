@@ -100,6 +100,25 @@ Put helper methods on the type that owns the logic, not merely on the type that 
 
 If a helper only constructs, copies, transforms, validates, or derives values for a specific target type from parameters, prefer placing it on that target type or inlining it. Keep a helper on a service, use case, view model, or other caller type only when that caller's own state, dependencies, invariants, lifecycle, or orchestration policy are meaningfully involved.
 
+## Explicit Existentials
+
+```yaml
+id: swift.explicit-existentials
+tier: convention
+review_passes: [structural]
+summary: Use any when a value stores or accepts an interface existential rather than a concrete type.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [protocol, existential, property, parameter, dependency-injection]
+mechanical_check:
+  search_terms: ["private let _", "public init", "protocol", ": AnyObject"]
+```
+
+When a value stores, accepts, or returns an interface/protocol existential rather than a concrete type or generic constraint, write the type with `any`.
+
+Use `any SomeProtocol` for stored dependencies and initializer parameters. Do not add `any` to protocol conformances, protocol inheritance clauses, or generic constraints.
+
 ## Optional Presence Binding
 
 ```yaml
