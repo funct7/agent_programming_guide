@@ -45,6 +45,7 @@ rules_by_review_pass:
   - core.domain-facts
   - core.domain-boundaries
   - core.state-shape
+  - core.test-scope-boundaries
   - principle.domain-modeling
   - principle.practical-compromise
   - principle.derived-values
@@ -117,6 +118,26 @@ rules:
     - derived-value
   tags: []
   source: core-rules.md#state-shape
+- id: core.test-scope-boundaries
+  tier: core-rule
+  review_passes:
+  - substantive
+  summary: 'Prefer London/mockist-style unit tests: isolate the behavior under test
+    and verify one meaningful boundary at a time.'
+  applies_when:
+    constructs:
+    - test
+    - unit-test
+    - integration-test
+    - adapter
+    - collaborator
+    - external-system
+    - mapper
+    - mock
+    - fake
+    - stub
+  tags: []
+  source: core-rules.md#test-scope-and-boundaries
 - id: principle.domain-modeling
   tier: principle
   review_passes:
