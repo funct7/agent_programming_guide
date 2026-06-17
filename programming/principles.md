@@ -178,26 +178,37 @@ Do not use optional return values to hide invalid input, illegal state, failed c
 
 Optional is appropriate when `nil` is a valid domain or state meaning. It is not a substitute for error handling.
 
-## Control Flow Readability
+## Physical Boundaries For Behavioral Units
 
 ```yaml
-id: principle.control-flow-readability
+id: principle.physical-behavior-boundaries
 tier: principle
 review_passes: [substantive]
-summary: Prefer statements that express one coherent idea; do not compress unrelated extraction, validity, authorization, and no-op checks.
+summary: Use physical code boundaries to separate distinct behavioral units so readers do not have to mentally untangle unrelated steps.
 applies_when:
-  constructs: [guard, if, switch, boolean-expression, reducer, control-flow]
+  constructs: [method, function, closure, pipeline, control-flow, boolean-expression, guard, if, switch, async, effect, validation, transformation, reducer]
 ```
 
-Prefer clarity over compactness. A statement should express one coherent idea, and different ideas should usually be separated into different statements.
+Readability is not only naming. Readability also comes from giving distinct behaviors distinct physical boundaries in code.
 
-Do not combine state extraction, validity checks, authorization checks, and no-op checks just to make the code shorter. The code should make each condition's meaning clear.
+When a method, function, closure, or pipeline performs multiple conceptual steps, separate those steps with a real code boundary when doing so reduces cognitive load. A boundary can be a method/function boundary, a local helper with meaningful semantics, a separate pipeline operator, or a separate control-flow statement.
 
-Examples:
+Use boundaries to show when one behavioral unit has ended and another has started. This lets the reader treat the previous unit as resolved instead of keeping all of its details in working memory.
 
-- Use one `guard` to extract required state, then another statement for a separate validity check.
-- Prefer an explicit `if` for a valid no-op case, especially when the return value communicates meaning, such as `identity` instead of `undefined`.
-- Avoid negative boolean logic in `guard` when naming the invalid case directly is easier to read.
+Good candidates for separate behavioral units include:
+
+- fetching or deriving required input,
+- converting absence into a domain error,
+- validating preconditions,
+- finalizing or transforming data,
+- persisting data,
+- compensating or cleaning up after failure,
+- mapping a value into a new representation,
+- branching between materially different behaviors.
+
+Do not collapse distinct behavioral units into one closure, guard, boolean expression, or pipeline stage only because it is convenient. A compact block can still be harder to read if the reader must infer where one concern ends and the next begins.
+
+This principle applies to pure deterministic code as well as non-deterministic IO or effectful code. Rx streams, async methods, callbacks, reducers, and regular functions all benefit from clear behavioral boundaries.
 
 ## Helper API Justification
 

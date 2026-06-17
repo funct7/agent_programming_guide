@@ -55,7 +55,7 @@ rules_by_review_pass:
   - principle.state-machine-reducers
   - principle.default-values
   - principle.optional-values
-  - principle.control-flow-readability
+  - principle.physical-behavior-boundaries
   - principle.helper-api-justification
   - principle.presentation-transforms
   - principle.examples-are-not-rules
@@ -282,22 +282,30 @@ rules:
     - error
   tags: []
   source: principles.md#optional-values
-- id: principle.control-flow-readability
+- id: principle.physical-behavior-boundaries
   tier: principle
   review_passes:
   - substantive
-  summary: Prefer statements that express one coherent idea; do not compress unrelated
-    extraction, validity, authorization, and no-op checks.
+  summary: Use physical code boundaries to separate distinct behavioral units so readers
+    do not have to mentally untangle unrelated steps.
   applies_when:
     constructs:
+    - method
+    - function
+    - closure
+    - pipeline
+    - control-flow
+    - boolean-expression
     - guard
     - if
     - switch
-    - boolean-expression
+    - async
+    - effect
+    - validation
+    - transformation
     - reducer
-    - control-flow
   tags: []
-  source: principles.md#control-flow-readability
+  source: principles.md#physical-boundaries-for-behavioral-units
 - id: principle.helper-api-justification
   tier: principle
   review_passes:

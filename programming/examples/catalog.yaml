@@ -33,3 +33,17 @@ examples:
   - principle.derived-values
   - core.state-shape
   source: examples/principles.md#derived-authentication-state
+- id: example.control-flow-behavior-boundaries
+  summary: Shows how separate control-flow statements reduce cognitive load by separating
+    required state extraction from valid no-op behavior.
+  tags: []
+  illustrates:
+  - principle.physical-behavior-boundaries
+  source: examples/principles.md#control-flow-behavior-boundaries
+- id: example.rx-pipeline-behavior-boundaries
+  summary: Shows how Rx operators can mark behavioral boundaries between lookup absence
+    handling and update orchestration.
+  tags: []
+  illustrates:
+  - principle.physical-behavior-boundaries
+  source: examples/principles.md#rx-pipeline-behavior-boundaries
