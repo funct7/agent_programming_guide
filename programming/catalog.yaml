@@ -35,6 +35,7 @@ rules_by_review_pass:
   - preference.enum-associated-value-labels
   - swift.synthesize-first
   - swift.public-concrete-type-construction
+  - swift.data-type-property-mutability
   - swift.factory-naming
   - swift.positive-boolean-naming
   - swift.helper-method-placement
@@ -63,6 +64,7 @@ rules_by_review_pass:
   - preference.extension-locality
   - preference.ui-construction
   - preference.type-conversion-apis
+  - swift.data-type-property-mutability
   - swift.positive-boolean-naming
   - swift.helper-method-placement
   repeated-check:
@@ -601,6 +603,26 @@ rules:
     - public init
     - static func make
   source: languages/swift.md#public-concrete-type-construction
+- id: swift.data-type-property-mutability
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: For plain Swift data types, choose let or var based on whether the property
+    is conceptually stable or normally changes.
+  tags:
+  - swift-lang
+  - type
+  applies_when:
+    language: swift
+    constructs:
+    - struct
+    - data-type
+    - stored-property
+    - request
+    - state
+    - value-object
+  source: languages/swift.md#data-type-property-mutability
 - id: swift.factory-naming
   tier: convention
   review_passes:

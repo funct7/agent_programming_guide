@@ -59,6 +59,25 @@ Preferred pattern:
 - expose `public static` factory methods for public construction APIs
 - only add a custom initializer when there is a specific need that cannot be expressed cleanly otherwise
 
+## Data Type Property Mutability
+
+```yaml
+id: swift.data-type-property-mutability
+tier: convention
+review_passes: [structural, substantive]
+summary: For plain Swift data types, choose let or var based on whether the property is conceptually stable or normally changes.
+tags: [swift-lang, type]
+applies_when:
+  language: swift
+  constructs: [struct, data-type, stored-property, request, state, value-object]
+```
+
+For plain data types with no meaningful behavior, stored property mutability should reflect the meaning of the value.
+
+Use `let` when the property is conceptually stable after construction, such as identity, fixed configuration, or values that should not change as part of the type's normal lifecycle.
+
+Use `var` when changing the property is a normal operation for the type, such as request parameters, paging cursors, form fields, mutable feature state, or values that are commonly copied and modified.
+
 ## Factory Naming
 
 ```yaml
