@@ -87,21 +87,6 @@ applies_when:
 
 Prefer `Self.init(...)` over `Self(...)` when invoking an initializer explicitly. This keeps initializer calls recognizable to Xcode/source tooling and preserves syntax highlighting.
 
-## Local Constants
-
-```yaml
-id: preference.local-constants
-tier: preference
-review_passes: [substantive]
-summary: Avoid single-use local constants when the inline expression remains easy to read.
-applies_when:
-  constructs: [local-constant, let-binding, control-flow, reducer]
-```
-
-Code convention: avoid introducing a local constant when the value is used only once and the inline expression remains easy to read.
-
-Local constants are useful when they name a meaningful intermediate concept, avoid duplicated work, clarify a complicated expression, or help separate distinct steps. Do not add them mechanically for short single-use expressions.
-
 ## Private Names
 
 ```yaml

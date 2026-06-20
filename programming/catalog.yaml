@@ -5,7 +5,7 @@ guide_root: "/Users/josh/.agent-guides/programming"
 usage:
   order:
   - define_review_target
-  - detect_target_language_files_and_constructs
+  - detect_target_files_and_constructs
   - structural_pass
   - substantive_pass
   - repeated_check_pass
@@ -41,7 +41,9 @@ rules_by_review_pass:
   - swift.helper-method-placement
   - swift.explicit-existentials
   - swift.optional-presence-binding
+  - swift.prefer-keypath-function-composition
   - swiftui.button-hit-area
+  - tca-sm.state-machine-file-organization
   substantive:
   - core.domain-facts
   - core.domain-boundaries
@@ -60,13 +62,15 @@ rules_by_review_pass:
   - principle.helper-api-justification
   - principle.presentation-transforms
   - principle.examples-are-not-rules
-  - preference.local-constants
   - preference.extension-locality
   - preference.ui-construction
   - preference.type-conversion-apis
   - swift.data-type-property-mutability
   - swift.positive-boolean-naming
   - swift.helper-method-placement
+  - swift.local-constants
+  - swift.empty-collection-transforms
+  - swift.prefer-keypath-function-composition
   repeated-check:
   - repeated.swift-explicit-returns
   - repeated.misplaced-helper-methods-on-caller
@@ -397,20 +401,6 @@ rules:
     - factory
   tags: []
   source: preferences.md#initializer-calls
-- id: preference.local-constants
-  tier: preference
-  review_passes:
-  - substantive
-  summary: Avoid single-use local constants when the inline expression remains easy
-    to read.
-  applies_when:
-    constructs:
-    - local-constant
-    - let-binding
-    - control-flow
-    - reducer
-  tags: []
-  source: preferences.md#local-constants
 - id: preference.private-names
   tier: preference
   review_passes:
@@ -574,7 +564,7 @@ rules:
     - protocol-conformance
     - Equatable
     - synthesized-code
-  source: languages/swift.md#synthesize-first
+  source: conventions/swift.md#synthesize-first
 - id: swift.public-concrete-type-construction
   tier: convention
   review_passes:
@@ -602,7 +592,7 @@ rules:
     - public class
     - public init
     - static func make
-  source: languages/swift.md#public-concrete-type-construction
+  source: conventions/swift.md#public-concrete-type-construction
 - id: swift.data-type-property-mutability
   tier: convention
   review_passes:
@@ -622,7 +612,7 @@ rules:
     - request
     - state
     - value-object
-  source: languages/swift.md#data-type-property-mutability
+  source: conventions/swift.md#data-type-property-mutability
 - id: swift.factory-naming
   tier: convention
   review_passes:
@@ -637,7 +627,7 @@ rules:
     - construction
     - conversion
     - retrieval
-  source: languages/swift.md#factory-naming
+  source: conventions/swift.md#factory-naming
 - id: swift.positive-boolean-naming
   tier: convention
   review_passes:
@@ -662,7 +652,7 @@ rules:
     - hasNo
     - shouldNot
     - cannot
-  source: languages/swift.md#positive-boolean-naming
+  source: conventions/swift.md#positive-boolean-naming
 - id: swift.helper-method-placement
   tier: convention
   review_passes:
@@ -690,7 +680,7 @@ rules:
     - func _from
     - Self.init
     - ".make("
-  source: languages/swift.md#helper-method-placement
+  source: conventions/swift.md#helper-method-placement
 - id: swift.explicit-existentials
   tier: convention
   review_passes:
@@ -713,7 +703,7 @@ rules:
     - public init
     - protocol
     - ": AnyObject"
-  source: languages/swift.md#explicit-existentials
+  source: conventions/swift.md#explicit-existentials
 - id: swift.optional-presence-binding
   tier: preference
   review_passes:
@@ -728,7 +718,58 @@ rules:
     - optional
     - condition
     - binding
-  source: languages/swift.md#optional-presence-binding
+  source: conventions/swift.md#optional-presence-binding
+- id: swift.local-constants
+  tier: convention
+  review_passes:
+  - substantive
+  summary: Avoid single-use local constants when the inline expression remains easy
+    to read.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - local-constant
+    - let-binding
+    - control-flow
+    - reducer
+  source: conventions/swift.md#local-constants
+- id: swift.empty-collection-transforms
+  tier: convention
+  review_passes:
+  - substantive
+  summary: Do not branch around collection map/flatMap only to handle the empty case.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - collection
+    - map
+    - flatMap
+    - isEmpty
+    - control-flow
+  source: conventions/swift.md#empty-collection-transforms
+- id: swift.prefer-keypath-function-composition
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Prefer key-path expressions and function composition over inline anonymous
+    transform closures when they express the operation clearly.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - closure
+    - map
+    - flatMap
+    - compactMap
+    - keypath
+    - function-composition
+  source: conventions/swift.md#prefer-key-paths-and-function-composition-in-transforms
 - id: swiftui.button-hit-area
   tier: convention
   review_passes:
@@ -744,4 +785,22 @@ rules:
     - Button
     - hit-area
     - layout
-  source: languages/swiftui.md#button-hit-area
+  source: conventions/swiftui.md#button-hit-area
+- id: tca-sm.state-machine-file-organization
+  tier: convention
+  review_passes:
+  - structural
+  summary: For TCA-SM features, keep state machine declaration, reducer, and IO implementation
+    in separate files unless the feature is very small.
+  tags: []
+  applies_when:
+    language: swift
+    constructs:
+    - tca-sm
+    - state-machine
+    - reducer
+    - io
+    - effect
+    - feature
+    - file-layout
+  source: conventions/tca-sm.md#state-machine-file-organization

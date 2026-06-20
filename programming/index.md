@@ -26,13 +26,14 @@ Read project-local guidance after the global guide. Treat it as local additions 
 - [Core Rules](./core-rules.md): small set of rules that should almost never be violated.
 - [Principles](./principles.md): default reasoning guidance; follow unless local context gives a good reason not to.
 - [Preferences](./preferences.md): Josh's preferred code organization and style; important but more flexible.
-- [Conventions](./languages/swift.md): language-specific, framework-specific, or cross-cutting conventions.
+- [Conventions](./conventions/swift.md): language-specific, framework-specific, or cross-cutting conventions.
 - [Repeated Mistakes](./repeated-mistakes.md): recurring agent failure modes to check explicitly before finishing work.
 
-## Language-Specific Guides
+## Convention Guides
 
-- [Swift Language Programming Guide](./languages/swift.md)
-- [SwiftUI Programming Guide](./languages/swiftui.md)
+- [Swift Language Programming Guide](./conventions/swift.md)
+- [SwiftUI Programming Guide](./conventions/swiftui.md)
+- [TCA-SM Programming Guide](./conventions/tca-sm.md)
 
 ## Supporting Material
 

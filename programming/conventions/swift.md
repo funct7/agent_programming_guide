@@ -189,3 +189,52 @@ if store.state.qna.currentUserID != nil {
 ```
 
 This is a readability preference, not a correctness rule. Use judgment when a direct nil comparison is materially clearer in local context.
+
+## Local Constants
+
+```yaml
+id: swift.local-constants
+tier: convention
+review_passes: [substantive]
+summary: Avoid single-use local constants when the inline expression remains easy to read.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [local-constant, let-binding, control-flow, reducer]
+```
+
+Avoid introducing a local constant when the value is used only once and the inline expression remains easy to read.
+
+Local constants are useful when they name a meaningful intermediate concept, avoid duplicated work, clarify a complicated expression, or help separate distinct steps. Do not add them mechanically for short single-use expressions.
+
+## Empty Collection Transforms
+
+```yaml
+id: swift.empty-collection-transforms
+tier: convention
+review_passes: [substantive]
+summary: Do not branch around collection map/flatMap only to handle the empty case.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [collection, map, flatMap, isEmpty, control-flow]
+```
+
+Do not add an `isEmpty` branch before applying `map`, `flatMap`, or equivalent collection transforms only to handle the empty case. Collection transforms already preserve emptiness, so the branch adds noise unless the empty path has meaningfully different behavior.
+
+## Prefer Key Paths And Function Composition In Transforms
+
+```yaml
+id: swift.prefer-keypath-function-composition
+tier: convention
+review_passes: [structural, substantive]
+summary: Prefer key-path expressions and function composition over inline anonymous transform closures when they express the operation clearly.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [closure, map, flatMap, compactMap, keypath, function-composition]
+```
+
+Prefer key-path expressions and function composition over inline anonymous closures in `map`, `flatMap`, `compactMap`, and similar transform positions when they express the operation clearly.
+
+Inline transform closures make it easy to add hidden side effects inside a transformation. If the operation is pure projection or function composition, express that directly. If the operation needs side effects, do not hide it in a transform closure.
