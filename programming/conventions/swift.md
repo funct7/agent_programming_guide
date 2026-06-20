@@ -182,6 +182,44 @@ When a value stores, accepts, or returns an interface/protocol existential rathe
 
 Use `any SomeProtocol` for stored dependencies and initializer parameters. Do not add `any` to protocol conformances, protocol inheritance clauses, or generic constraints.
 
+## Weak Versus Unowned References
+
+```yaml
+id: swift.weak-versus-unowned
+tier: convention
+review_passes: [structural, substantive]
+summary: Use unowned when the referenced object is guaranteed to outlive the owner; reserve weak for uncertain lifecycles.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [reference, ownership, weak, unowned, lifecycle, UIKit, IBOutlet]
+```
+
+Use `unowned` when the referenced object is guaranteed to outlive the owner under the local lifecycle contract.
+
+Reserve `weak` for references whose lifecycle is genuinely uncertain, where the referenced object may disappear independently and `nil` is a meaningful runtime state.
+
+UIKit outlet references owned by a view controller's loaded view hierarchy should generally be `unowned` implicitly unwrapped optionals, because the view hierarchy owns the views and the view controller should not treat connected outlets as independently disappearing.
+
+## Implicitly Unwrapped Optionals
+
+```yaml
+id: swift.implicitly-unwrapped-optionals
+tier: convention
+review_passes: [structural, substantive]
+summary: Use implicitly unwrapped optionals for late-initialized values that are required after setup and should fail loudly if missing.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [optional, implicitly-unwrapped-optional, late-initialization, IBOutlet, lifecycle, UIKit]
+```
+
+Use implicitly unwrapped optionals for values that are assigned after initialization but are required for normal operation once setup has completed.
+
+Treat `T!` as a late-initialized required value, not as a nullable value. If absence is a valid state that callers should handle, use `T?` instead.
+
+UIKit outlets that must be connected for the screen to function are a normal use case for implicitly unwrapped optionals.
+
 ## Optional Presence Binding
 
 ```yaml

@@ -33,6 +33,7 @@ Read project-local guidance after the global guide. Treat it as local additions 
 
 - [Swift Language Programming Guide](./conventions/swift.md)
 - [SwiftUI Programming Guide](./conventions/swiftui.md)
+- [UIKit Programming Guide](./conventions/uikit.md)
 - [TCA-SM Programming Guide](./conventions/tca-sm.md)
 
 ## Supporting Material

@@ -41,10 +41,13 @@ rules_by_review_pass:
   - swift.helper-method-placement
   - swift.extension-body-cohesion
   - swift.explicit-existentials
+  - swift.weak-versus-unowned
+  - swift.implicitly-unwrapped-optionals
   - swift.optional-presence-binding
   - swift.prefer-keypath-function-composition
   - swiftui.button-hit-area
   - tca-sm.state-machine-file-organization
+  - uikit.visibility-state
   substantive:
   - core.domain-facts
   - core.domain-boundaries
@@ -69,9 +72,12 @@ rules_by_review_pass:
   - swift.data-type-property-mutability
   - swift.positive-boolean-naming
   - swift.helper-method-placement
+  - swift.weak-versus-unowned
+  - swift.implicitly-unwrapped-optionals
   - swift.local-constants
   - swift.empty-collection-transforms
   - swift.prefer-keypath-function-composition
+  - uikit.visibility-state
   repeated-check:
   - repeated.swift-explicit-returns
   - repeated.misplaced-helper-methods-on-caller
@@ -750,6 +756,45 @@ rules:
     - protocol
     - ": AnyObject"
   source: conventions/swift.md#explicit-existentials
+- id: swift.weak-versus-unowned
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Use unowned when the referenced object is guaranteed to outlive the owner;
+    reserve weak for uncertain lifecycles.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - reference
+    - ownership
+    - weak
+    - unowned
+    - lifecycle
+    - UIKit
+    - IBOutlet
+  source: conventions/swift.md#weak-versus-unowned-references
+- id: swift.implicitly-unwrapped-optionals
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Use implicitly unwrapped optionals for late-initialized values that are
+    required after setup and should fail loudly if missing.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - optional
+    - implicitly-unwrapped-optional
+    - late-initialization
+    - IBOutlet
+    - lifecycle
+    - UIKit
+  source: conventions/swift.md#implicitly-unwrapped-optionals
 - id: swift.optional-presence-binding
   tier: preference
   review_passes:
@@ -850,3 +895,21 @@ rules:
     - feature
     - file-layout
   source: conventions/tca-sm.md#state-machine-file-organization
+- id: uikit.visibility-state
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Prefer the positive isVisible wrapper over UIView.isHidden when changing
+    UIKit visibility.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - UIKit
+    - UIView
+    - visibility
+    - isHidden
+    - isVisible
+  source: conventions/uikit.md#visibility-state
