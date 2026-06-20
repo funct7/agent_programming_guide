@@ -138,6 +138,31 @@ Put helper methods on the type that owns the logic, not merely on the type that 
 
 If a helper only constructs, copies, transforms, validates, or derives values for a specific target type from parameters, prefer placing it on that target type or inlining it. Keep a helper on a service, use case, view model, or other caller type only when that caller's own state, dependencies, invariants, lifecycle, or orchestration policy are meaningfully involved.
 
+## Extension Body Cohesion
+
+```yaml
+id: swift.extension-body-cohesion
+tier: convention
+review_passes: [structural]
+summary: Keep each Swift extension body cohesive; split extensions by conformance, visibility, lifecycle, or member purpose when they differ.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [extension, conformance, method, computed-property, factory, initializer, access-level, api-surface]
+```
+
+Keep each Swift extension body cohesive. Members in the same extension should have the same reason to be grouped together.
+
+Prefer separate extension bodies when members differ by:
+- protocol conformance or interface being implemented
+- intended visibility or API surface
+- lifecycle or usage boundary
+- member purpose, such as construction, conversion, conformance requirements, computed projections, or internal helpers
+
+For example, do not lump unrelated `Equatable`, `Hashable`, and `Identifiable` implementations into one generic extension body. Likewise, avoid mixing public construction APIs with internal convenience helpers when their callers and visibility are different.
+
+This is a readability convention, not a strict one-extension-per-method rule. Keep related small members together when they form one coherent API surface or one conformance implementation.
+
 ## Explicit Existentials
 
 ```yaml

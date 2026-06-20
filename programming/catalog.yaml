@@ -39,6 +39,7 @@ rules_by_review_pass:
   - swift.factory-naming
   - swift.positive-boolean-naming
   - swift.helper-method-placement
+  - swift.extension-body-cohesion
   - swift.explicit-existentials
   - swift.optional-presence-binding
   - swift.prefer-keypath-function-composition
@@ -706,6 +707,26 @@ rules:
     - Self.init
     - ".make("
   source: conventions/swift.md#helper-method-placement
+- id: swift.extension-body-cohesion
+  tier: convention
+  review_passes:
+  - structural
+  summary: Keep each Swift extension body cohesive; split extensions by conformance,
+    visibility, lifecycle, or member purpose when they differ.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - extension
+    - conformance
+    - method
+    - computed-property
+    - factory
+    - initializer
+    - access-level
+    - api-surface
+  source: conventions/swift.md#extension-body-cohesion
 - id: swift.explicit-existentials
   tier: convention
   review_passes:
