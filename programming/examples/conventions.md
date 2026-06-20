@@ -54,3 +54,33 @@ public extension Book.Passage {
 ```
 
 Keeping the helper on the caller is justified only when the caller's state, dependencies, invariants, lifecycle, or orchestration policy are meaningfully involved.
+
+## Early Exit Without Double Negatives
+
+```yaml
+id: example.early-exit-without-double-negatives
+summary: Shows using if for direct early exits instead of guard with negated Boolean flow.
+tags: []
+illustrates: [swift.early-exit-boolean-conditions]
+```
+
+Avoid forcing a direct no-op or failure condition into `guard` when doing so creates double-negative flow:
+
+```swift
+guard !referralCode.isEmpty else { return }
+guard referralCode.isNotEmpty else { return }
+```
+
+Both forms require the reader to evaluate a condition and then invert it again through `else`.
+
+Prefer naming the exit condition directly:
+
+```swift
+if referralCode.isEmpty { return }
+```
+
+Use `guard` when the code below requires a positive continuation condition, especially for required binding:
+
+```swift
+guard let user else { return }
+```

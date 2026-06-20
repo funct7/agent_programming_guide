@@ -38,6 +38,7 @@ rules_by_review_pass:
   - swift.data-type-property-mutability
   - swift.factory-naming
   - swift.positive-boolean-naming
+  - swift.early-exit-boolean-conditions
   - swift.helper-method-placement
   - swift.extension-body-cohesion
   - swift.explicit-existentials
@@ -71,6 +72,7 @@ rules_by_review_pass:
   - preference.type-conversion-apis
   - swift.data-type-property-mutability
   - swift.positive-boolean-naming
+  - swift.early-exit-boolean-conditions
   - swift.helper-method-placement
   - swift.weak-versus-unowned
   - swift.implicitly-unwrapped-optionals
@@ -685,6 +687,25 @@ rules:
     - shouldNot
     - cannot
   source: conventions/swift.md#positive-boolean-naming
+- id: swift.early-exit-boolean-conditions
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Avoid double-negative early-exit flow; use guard for positive continuation
+    requirements and if for direct exit conditions.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - guard
+    - if
+    - boolean
+    - negation
+    - early-exit
+    - control-flow
+  source: conventions/swift.md#early-exit-boolean-conditions
 - id: swift.helper-method-placement
   tier: convention
   review_passes:

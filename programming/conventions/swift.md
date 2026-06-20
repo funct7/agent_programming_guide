@@ -119,6 +119,25 @@ Prefer positive Boolean property and method names.
 
 Avoid negative names such as `isInvalid`, `isNotReady`, or `hasNoItems` unless the negative state is the expected or default domain state being queried. Positive names keep call sites easier to read, especially when a condition must be negated.
 
+## Early Exit Boolean Conditions
+
+```yaml
+id: swift.early-exit-boolean-conditions
+tier: convention
+review_passes: [structural, substantive]
+summary: Avoid double-negative early-exit flow; use guard for positive continuation requirements and if for direct exit conditions.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [guard, if, boolean, negation, early-exit, control-flow]
+```
+
+For early exits, prefer expressing the condition that exits directly.
+
+Use `guard` when the condition describes a positive requirement for the code path that continues.
+
+When a `guard` condition would need a negative expression and then invert it again through `else`, prefer an `if` statement that directly names the exit condition. This avoids double-negative control flow and keeps the early exit easier to read.
+
 ## Helper Method Placement
 
 ```yaml

@@ -10,6 +10,13 @@ examples:
   illustrates:
   - swift.helper-method-placement
   source: examples/conventions.md#helper-method-on-target-type
+- id: example.early-exit-without-double-negatives
+  summary: Shows using if for direct early exits instead of guard with negated Boolean
+    flow.
+  tags: []
+  illustrates:
+  - swift.early-exit-boolean-conditions
+  source: examples/conventions.md#early-exit-without-double-negatives
 - id: example.product-type-vs-sum-type
   summary: Shows how a product type can represent invalid states and how a sum type
     removes the invalid combinations.
