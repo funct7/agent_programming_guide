@@ -57,3 +57,23 @@ mechanical_check:
 Before adding a local helper for generic behavior such as blank-string checks, collection checks, simple predicates, or common value transforms, search the project and imported in-workspace libraries for an existing utility.
 
 Do not duplicate helpers that already exist in `Common`, `LazyKit`, or another dependency already imported by the file. Use the existing API unless there is a specific semantic difference worth naming locally.
+
+## Missing Bundle For Non-Main Asset Lookups
+
+```yaml
+id: repeated.missing-bundle-for-non-main-asset-lookups
+tier: repeated-mistake
+review_passes: [repeated-check]
+summary: When referencing named image assets from framework or package targets, pass the asset bundle explicitly.
+applies_when:
+  language: swift
+  constructs: [SwiftUI, UIKit, asset, image, bundle, target]
+mechanical_check:
+  search_terms: ["Image(\"", "UIImage(named:", "bundle: .current", "in: .current", "Assets.xcassets"]
+```
+
+Before using a named image asset with APIs such as `Image("...")` or `UIImage(named:)`, check where the asset catalog is bundled.
+
+Do not rely on the default main-bundle lookup when the asset belongs to a framework, package, Presentation target, or other non-main bundle. Pass the bundle explicitly, using the local bundle helper such as `.current` when the project provides one.
+
+If nearby image or nib/storyboard code in the same module uses `.current`, treat that as a signal that named resources from that module should also specify the bundle.

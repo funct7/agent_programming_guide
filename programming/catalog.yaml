@@ -75,6 +75,7 @@ rules_by_review_pass:
   - repeated.swift-explicit-returns
   - repeated.misplaced-helper-methods-on-caller
   - repeated.duplicating-existing-local-utility-apis
+  - repeated.missing-bundle-for-non-main-asset-lookups
 rules:
 - id: core.domain-facts
   tier: core-rule
@@ -550,6 +551,30 @@ rules:
     - private var _is
   tags: []
   source: repeated-mistakes.md#duplicating-existing-local-utility-apis
+- id: repeated.missing-bundle-for-non-main-asset-lookups
+  tier: repeated-mistake
+  review_passes:
+  - repeated-check
+  summary: When referencing named image assets from framework or package targets,
+    pass the asset bundle explicitly.
+  applies_when:
+    language: swift
+    constructs:
+    - SwiftUI
+    - UIKit
+    - asset
+    - image
+    - bundle
+    - target
+  mechanical_check:
+    search_terms:
+    - Image("
+    - 'UIImage(named:'
+    - 'bundle: .current'
+    - 'in: .current'
+    - Assets.xcassets
+  tags: []
+  source: repeated-mistakes.md#missing-bundle-for-non-main-asset-lookups
 - id: swift.synthesize-first
   tier: convention
   review_passes:
