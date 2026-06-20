@@ -45,6 +45,23 @@ applies_when:
 - Prefer sum types when product types would allow impossible, invalid, or ambiguous states.
 - Do not preserve boolean flags plus values when the real states are mutually exclusive.
 
+## Behavior-Enforcing Design
+
+```yaml
+id: core.behavior-enforcing-design
+tier: core-rule
+review_passes: [substantive]
+summary: Design types and interfaces so required behavior is enforced by construction and incorrect use is not available.
+applies_when:
+  constructs: [api-surface, interface, state, invariant, lifecycle, validation, side-effect, encapsulation, type-shape]
+```
+
+Design types and interfaces so the caller can only perform the correct behavior.
+
+When a type has required invariants, lifecycle rules, validation, state synchronization, side effects, or presentation updates, encode those constraints into the type or API boundary. Prefer designs where misuse is impossible or unavailable, rather than relying on callers to remember which sequence, helper, or convention is required.
+
+Use type shape, access control, property observers, focused methods, state transitions, and sum types to make the valid path the natural and enforceable path. Do not expose raw state or unconstrained operations when using them directly can bypass behavior the type is responsible for preserving.
+
 ## Test Scope And Boundaries
 
 ```yaml

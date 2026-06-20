@@ -53,6 +53,7 @@ rules_by_review_pass:
   - core.domain-facts
   - core.domain-boundaries
   - core.state-shape
+  - core.behavior-enforcing-design
   - core.test-scope-boundaries
   - principle.domain-modeling
   - principle.practical-compromise
@@ -134,6 +135,25 @@ rules:
     - derived-value
   tags: []
   source: core-rules.md#state-shape
+- id: core.behavior-enforcing-design
+  tier: core-rule
+  review_passes:
+  - substantive
+  summary: Design types and interfaces so required behavior is enforced by construction
+    and incorrect use is not available.
+  applies_when:
+    constructs:
+    - api-surface
+    - interface
+    - state
+    - invariant
+    - lifecycle
+    - validation
+    - side-effect
+    - encapsulation
+    - type-shape
+  tags: []
+  source: core-rules.md#behavior-enforcing-design
 - id: core.test-scope-boundaries
   tier: core-rule
   review_passes:

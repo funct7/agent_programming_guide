@@ -24,6 +24,13 @@ examples:
   illustrates:
   - core.state-shape
   source: examples/core-rules.md#product-type-vs-sum-type
+- id: example.property-change-required-synchronization
+  summary: Shows constraining state changes so required synchronization cannot be
+    bypassed.
+  tags: []
+  illustrates:
+  - core.behavior-enforcing-design
+  source: examples/core-rules.md#property-change-with-required-synchronization
 - id: example.qna-modeling-case-study
   summary: Shows how Q&A server list/thread shapes should map into one domain inquiry
     concept instead of transport-shaped domain types.

@@ -30,3 +30,39 @@ enum Content {
 ```
 
 The rule is broader than privacy: when fields create invalid combinations, model the real alternatives directly.
+
+## Property Change With Required Synchronization
+
+```yaml
+id: example.property-change-required-synchronization
+summary: Shows constraining state changes so required synchronization cannot be bypassed.
+tags: []
+illustrates: [core.behavior-enforcing-design]
+```
+
+If changing a stored value must also update other state or UI, avoid exposing a separate helper that callers must remember to use:
+
+```swift
+private var referralCode = ""
+
+private func setReferralCode(_ referralCode: String) {
+    self.referralCode = referralCode
+    referralCodeButton.isVisible = referralCode.isNotEmpty
+    referralCodeButton.textLabel.text = referralCode
+}
+```
+
+This shape leaves two possible mutation paths: direct assignment and the helper. Direct assignment can bypass the required synchronization.
+
+Constrain the mutation boundary so the required behavior is attached to the value change:
+
+```swift
+private var referralCode = "" {
+    didSet {
+        referralCodeButton.isVisible = referralCode.isNotEmpty
+        referralCodeButton.textLabel.text = referralCode
+    }
+}
+```
+
+The point is not that every property needs `didSet`. The point is that when behavior must always happen with a change, the interface should make bypassing that behavior unavailable.
