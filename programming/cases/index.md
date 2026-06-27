@@ -17,6 +17,7 @@ Feedback cases are reported incidents, not authoritative guide rules. Use them t
 | --- | --- | --- | --- |
 | [Dependency Injection With Over-Specific Bridge Types](./dependency-injection-over-specific-bridge-types.md) | A feature depended on a concrete bridge even though it only needed a stream of close events. | Dependency boundaries, interface segregation | Reported case |
 | [Public Domain Extension For Local Helper](./public-domain-extension-for-local-helper.md) | A local use-case helper was added as a public domain type extension even though it was not domain-level API. | Extension locality, helper placement | Reported case |
+| [Cohesive Code Unit Boundary](./cohesive-code-unit-boundary.md) | A code unit mixed distinct responsibilities instead of representing one coherent operation or concept. | Physical behavior boundaries, cohesive responsibilities | Reported case |
 
 ## Case File Structure
 
