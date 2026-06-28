@@ -4,6 +4,14 @@ generated: true
 guide_root: "/Users/josh/.agent-guides/programming"
 authoritative: false
 cases:
+- id: case.cohesive-code-unit-boundary
+  status: reported
+  summary: A code unit mixed distinct responsibilities instead of representing one
+    coherent operation or concept.
+  tags: []
+  related_rules:
+  - principle.physical-behavior-boundaries
+  source: cases/cohesive-code-unit-boundary.md
 - id: case.dependency-injection-over-specific-bridge-types
   status: reported
   summary: A feature depended on a concrete bridge type even though it only needed

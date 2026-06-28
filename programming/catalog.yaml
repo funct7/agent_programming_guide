@@ -33,6 +33,7 @@ rules_by_review_pass:
   - preference.extension-locality
   - preference.ui-construction
   - preference.enum-associated-value-labels
+  - convention.semantic-member-grouping
   - swift.synthesize-first
   - swift.public-concrete-type-construction
   - swift.data-type-property-mutability
@@ -71,6 +72,7 @@ rules_by_review_pass:
   - preference.extension-locality
   - preference.ui-construction
   - preference.type-conversion-apis
+  - convention.semantic-member-grouping
   - swift.data-type-property-mutability
   - swift.positive-boolean-naming
   - swift.early-exit-boolean-conditions
@@ -604,6 +606,26 @@ rules:
     - Assets.xcassets
   tags: []
   source: repeated-mistakes.md#missing-bundle-for-non-main-asset-lookups
+- id: convention.semantic-member-grouping
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Group members by semantic responsibility instead of placing cross-cutting
+    APIs in incidental sections.
+  applies_when:
+    constructs:
+    - api-surface
+    - interface
+    - protocol
+    - class
+    - struct
+    - extension
+    - method
+    - property
+    - file-layout
+  tags: []
+  source: conventions/general.md#semantic-member-grouping
 - id: swift.synthesize-first
   tier: convention
   review_passes:
