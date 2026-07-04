@@ -34,6 +34,7 @@ rules_by_review_pass:
   - preference.ui-construction
   - preference.enum-associated-value-labels
   - convention.semantic-member-grouping
+  - javascript.prefer-arrow-functions
   - swift.synthesize-first
   - swift.public-concrete-type-construction
   - swift.data-type-property-mutability
@@ -626,6 +627,23 @@ rules:
     - file-layout
   tags: []
   source: conventions/general.md#semantic-member-grouping
+- id: javascript.prefer-arrow-functions
+  tier: convention
+  review_passes:
+  - structural
+  summary: Prefer named arrow functions in JavaScript and TypeScript whenever possible;
+    use function declarations only when their specific language behavior is needed.
+  tags: []
+  applies_when:
+    constructs:
+    - function
+    - arrow-function
+    - component
+    - hook
+    - callback
+    - helper
+    - module-api
+  source: conventions/javascript.md#prefer-arrow-functions
 - id: swift.synthesize-first
   tier: convention
   review_passes:

@@ -32,6 +32,7 @@ Read project-local guidance after the global guide. Treat it as local additions 
 ## Convention Guides
 
 - [General Programming Conventions](./conventions/general.md)
+- [JavaScript Programming Guide](./conventions/javascript.md)
 - [Swift Language Programming Guide](./conventions/swift.md)
 - [SwiftUI Programming Guide](./conventions/swiftui.md)
 - [UIKit Programming Guide](./conventions/uikit.md)
