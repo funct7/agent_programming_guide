@@ -34,6 +34,9 @@ rules_by_review_pass:
   - preference.ui-construction
   - preference.enum-associated-value-labels
   - convention.semantic-member-grouping
+  - git.commit-message-style
+  - git.branch-policy
+  - git.merge-policy
   - javascript.prefer-arrow-functions
   - swift.synthesize-first
   - swift.public-concrete-type-construction
@@ -627,6 +630,58 @@ rules:
     - file-layout
   tags: []
   source: conventions/general.md#semantic-member-grouping
+- id: git.commit-message-style
+  tier: convention
+  review_passes:
+  - structural
+  summary: Before creating a commit, inspect recent history and match the repository's
+    commit-message style.
+  applies_when:
+    constructs:
+    - git
+    - commit
+    - commit-message
+    - repository-history
+  tags: []
+  source: conventions/git.md#commit-message-style
+- id: git.branch-policy
+  tier: convention
+  review_passes:
+  - structural
+  summary: Use main or master for production, staging for the next regular release,
+    and typed work branches such as fix, ref, and ft.
+  applies_when:
+    constructs:
+    - git
+    - branch
+    - production
+    - staging
+    - release
+    - hotfix
+    - feature
+    - refactor
+    - bugfix
+  tags: []
+  source: conventions/git.md#branch-policy
+- id: git.merge-policy
+  tier: convention
+  review_passes:
+  - structural
+  summary: Integrate public work branches with merge commits; reserve rebase and squash
+    for local cleanup only.
+  applies_when:
+    constructs:
+    - git
+    - merge
+    - rebase
+    - squash
+    - branch
+    - public-branch
+    - staging
+    - release
+    - hotfix
+  tags: []
+  source: conventions/git.md#merge-policy
 - id: javascript.prefer-arrow-functions
   tier: convention
   review_passes:
