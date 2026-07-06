@@ -77,6 +77,7 @@ rules_by_review_pass:
   - preference.ui-construction
   - preference.type-conversion-apis
   - convention.semantic-member-grouping
+  - convention.observable-time-varying-values
   - swift.data-type-property-mutability
   - swift.positive-boolean-naming
   - swift.early-exit-boolean-conditions
@@ -630,6 +631,24 @@ rules:
     - file-layout
   tags: []
   source: conventions/general.md#semantic-member-grouping
+- id: convention.observable-time-varying-values
+  tier: convention
+  review_passes:
+  - substantive
+  summary: Make observable/reactive time-varying values explicit instead of hiding
+    them as plain mutable properties.
+  applies_when:
+    constructs:
+    - state
+    - observable
+    - stream
+    - publisher
+    - property
+    - state-machine
+    - ui-state
+    - lifecycle
+  tags: []
+  source: conventions/general.md#observable-time-varying-values
 - id: git.commit-message-style
   tier: convention
   review_passes:
