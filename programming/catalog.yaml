@@ -348,6 +348,10 @@ rules:
     - validation
     - transformation
     - reducer
+    - database-query
+    - collection-transform
+    - map
+    - filter
   tags: []
   source: principles.md#physical-boundaries-for-behavioral-units
 - id: principle.helper-api-justification

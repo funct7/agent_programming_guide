@@ -49,3 +49,21 @@ The issue is not only whether a helper deserves to exist or whether its name is 
 #### Possible Promotion
 
 If similar cases repeat, consider adding a principle that each code unit should represent one coherent responsibility at its abstraction level. The principle should be reviewed against existing physical-boundary, change-boundary, helper-justification, and extension-cohesion guidance before promotion.
+
+### 2026-07-14: Annotation Assignment Fetch And Transformation Pipeline
+
+#### Context
+
+GRDB annotation assignment helpers inlined `fetchAll` into deterministic grouping and combined projecting records to tags with converting those tags into a set inside one `mapValues` operation.
+
+#### Feedback
+
+Josh distinguished two boundaries: non-deterministic database reads should be materialized before deterministic processing, while deterministic transformations may remain chained as long as each stage performs one semantic transformation.
+
+#### Nuance
+
+The concern is not chaining itself or a mechanical preference for local constants. Pure grouping, projection, and representation conversion can form one readable chain; the database read needs a separate boundary, and distinct deterministic transformations need distinct stages.
+
+#### Possible Promotion
+
+This incident supports clarifying `principle.physical-behavior-boundaries` rather than introducing an overlapping principle.

@@ -186,7 +186,7 @@ tier: principle
 review_passes: [substantive]
 summary: Use physical code boundaries to separate distinct behavioral units so readers do not have to mentally untangle unrelated steps.
 applies_when:
-  constructs: [method, function, closure, pipeline, control-flow, boolean-expression, guard, if, switch, async, effect, validation, transformation, reducer]
+  constructs: [method, function, closure, pipeline, control-flow, boolean-expression, guard, if, switch, async, effect, validation, transformation, reducer, database-query, collection-transform, map, filter]
 ```
 
 Readability is not only naming. Readability also comes from giving distinct behaviors distinct physical boundaries in code.
@@ -207,6 +207,8 @@ Good candidates for separate behavioral units include:
 - branching between materially different behaviors.
 
 Do not collapse distinct behavioral units into one closure, guard, boolean expression, or pipeline stage only because it is convenient. A compact block can still be harder to read if the reader must infer where one concern ends and the next begins.
+
+Materialize a non-deterministic or effectful result before passing it into a deterministic transformation pipeline. Pure deterministic transformations may remain chained, but each stage should perform one semantic transformation rather than combining distinct transformations inside one operation. Fuse stages only when a measured performance need justifies it.
 
 This principle applies to pure deterministic code as well as non-deterministic IO or effectful code. Rx streams, async methods, callbacks, reducers, and regular functions all benefit from clear behavioral boundaries.
 
