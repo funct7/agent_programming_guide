@@ -58,6 +58,23 @@ Before adding a local helper for generic behavior such as blank-string checks, c
 
 Do not duplicate helpers that already exist in `Common`, `LazyKit`, or another dependency already imported by the file. Use the existing API unless there is a specific semantic difference worth naming locally.
 
+## Overusing Default Arguments
+
+```yaml
+id: repeated.overusing-default-arguments
+tier: repeated-mistake
+review_passes: [repeated-check]
+summary: Do not add default arguments just because a caller has a convenient startup value.
+applies_when:
+  constructs: [default-argument, initializer, factory, form, state, api-surface]
+mechanical_check:
+  search_terms: ["= \"\"", "= []", "= .", "static func make", "init("]
+```
+
+Default arguments should communicate a domain-meaningful default.
+
+Do not add defaults merely because a UI starts blank, a caller needs a fallback, or one construction site currently has a preferred initial value. If values are equally valid in the domain, require explicit arguments and keep any UI initial-state choice at the UI setup boundary.
+
 ## Missing Bundle For Non-Main Asset Lookups
 
 ```yaml

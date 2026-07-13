@@ -92,6 +92,7 @@ rules_by_review_pass:
   - repeated.swift-explicit-returns
   - repeated.misplaced-helper-methods-on-caller
   - repeated.duplicating-existing-local-utility-apis
+  - repeated.overusing-default-arguments
   - repeated.missing-bundle-for-non-main-asset-lookups
 rules:
 - id: core.domain-facts
@@ -587,6 +588,29 @@ rules:
     - private var _is
   tags: []
   source: repeated-mistakes.md#duplicating-existing-local-utility-apis
+- id: repeated.overusing-default-arguments
+  tier: repeated-mistake
+  review_passes:
+  - repeated-check
+  summary: Do not add default arguments just because a caller has a convenient startup
+    value.
+  applies_when:
+    constructs:
+    - default-argument
+    - initializer
+    - factory
+    - form
+    - state
+    - api-surface
+  mechanical_check:
+    search_terms:
+    - = ""
+    - "= []"
+    - "= ."
+    - static func make
+    - init(
+  tags: []
+  source: repeated-mistakes.md#overusing-default-arguments
 - id: repeated.missing-bundle-for-non-main-asset-lookups
   tier: repeated-mistake
   review_passes:
