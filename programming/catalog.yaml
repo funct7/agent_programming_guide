@@ -28,7 +28,6 @@ rules_by_review_pass:
   - principle.state-machine-reducers
   - preference.type-definitions-minimal
   - preference.split-files-for-navigation
-  - preference.initializer-calls
   - preference.private-names
   - preference.extension-locality
   - preference.ui-construction
@@ -40,6 +39,7 @@ rules_by_review_pass:
   - javascript.prefer-arrow-functions
   - swift.synthesize-first
   - swift.public-concrete-type-construction
+  - swift.initializer-calls
   - swift.data-type-property-mutability
   - swift.factory-naming
   - swift.positive-boolean-naming
@@ -433,18 +433,6 @@ rules:
     - navigation
   tags: []
   source: preferences.md#split-files-for-navigation
-- id: preference.initializer-calls
-  tier: preference
-  review_passes:
-  - structural
-  summary: Prefer Self.init(...) over Self(...) when invoking an initializer explicitly.
-  applies_when:
-    language: swift
-    constructs:
-    - initializer-call
-    - factory
-  tags: []
-  source: preferences.md#initializer-calls
 - id: preference.private-names
   tier: preference
   review_passes:
@@ -791,6 +779,19 @@ rules:
     - public init
     - static func make
   source: conventions/swift.md#public-concrete-type-construction
+- id: swift.initializer-calls
+  tier: convention
+  review_passes:
+  - structural
+  summary: Prefer Self.init(...) over Self(...) when invoking an initializer explicitly.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - initializer-call
+    - factory
+  source: conventions/swift.md#initializer-calls
 - id: swift.data-type-property-mutability
   tier: convention
   review_passes:

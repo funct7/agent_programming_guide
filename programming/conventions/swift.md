@@ -61,6 +61,21 @@ Preferred pattern:
 - require meaningful construction behavior or semantics for static factories on any type
 - only add a custom initializer when there is a specific need that cannot be expressed cleanly otherwise
 
+## Initializer Calls
+
+```yaml
+id: swift.initializer-calls
+tier: convention
+review_passes: [structural]
+summary: Prefer Self.init(...) over Self(...) when invoking an initializer explicitly.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [initializer-call, factory]
+```
+
+Prefer `Self.init(...)` over `Self(...)` when invoking an initializer explicitly. This keeps initializer calls recognizable to Xcode/source tooling and preserves syntax highlighting. This convention does not apply to named types: continue to write `SomeType(...)`, not `SomeType.init(...)`.
+
 ## Data Type Property Mutability
 
 ```yaml

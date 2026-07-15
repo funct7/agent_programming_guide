@@ -73,20 +73,6 @@ Rationale:
 - Xcode's open type menu can be unreliable.
 - Major feature concepts should be discoverable by filename/path.
 
-## Initializer Calls
-
-```yaml
-id: preference.initializer-calls
-tier: preference
-review_passes: [structural]
-summary: Prefer Self.init(...) over Self(...) when invoking an initializer explicitly.
-applies_when:
-  language: swift
-  constructs: [initializer-call, factory]
-```
-
-Prefer `Self.init(...)` over `Self(...)` when invoking an initializer explicitly. This keeps initializer calls recognizable to Xcode/source tooling and preserves syntax highlighting.
-
 ## Private Names
 
 ```yaml
