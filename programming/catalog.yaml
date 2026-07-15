@@ -767,8 +767,8 @@ rules:
   tier: convention
   review_passes:
   - structural
-  summary: For public concrete Swift types, preserve synthesized construction when
-    possible and avoid public init unless specifically justified.
+  summary: Preserve synthesized memberwise initialization for structs, and use static
+    factories only when they add meaningful construction behavior or semantics.
   tags:
   - swift-lang
   - constructor

@@ -38,7 +38,7 @@ If none of those apply, prefer the synthesized form.
 id: swift.public-concrete-type-construction
 tier: convention
 review_passes: [structural]
-summary: For public concrete Swift types, preserve synthesized construction when possible and avoid public init unless specifically justified.
+summary: Preserve synthesized memberwise initialization for structs, and use static factories only when they add meaningful construction behavior or semantics.
 tags: [swift-lang, constructor, type, access-level]
 applies_when:
   language: swift
@@ -47,16 +47,18 @@ mechanical_check:
   search_terms: ["public struct", "public final class", "public class", "public init", "static func make"]
 ```
 
-For public concrete Swift types, prefer preserving synthesized construction behavior instead of exposing a custom `public init(...)` by default.
+For public structs, prefer preserving synthesized memberwise initialization instead of exposing a custom `public init(...)` by default. When a public construction API is needed, a `public static` factory method can preserve the synthesized memberwise initializer.
 
-When a public construction API is needed, prefer a `public static` factory method over a `public init(...)`.
+This synthesis rationale does not apply to classes. Do not prefer a static factory over an initializer merely because the type is public or concrete.
 
-This is especially important for `public struct` because adding a custom initializer prevents the compiler from providing the synthesized memberwise initializer. For public concrete classes, the concern is API surface: callers should not get direct construction unless that is deliberately part of the type's contract.
+For any type, use a static factory when it provides meaningful construction behavior or semantics. Do not add a factory that only forwards ordinary construction without adding such meaning.
 
 Preferred pattern:
 - keep the struct definition as simple as possible
 - use synthesized code whenever possible
-- expose `public static` factory methods for public construction APIs
+- use a `public static` factory when a struct needs a public construction API without suppressing synthesized memberwise initialization
+- choose class construction APIs based on their actual contract rather than a general factory preference
+- require meaningful construction behavior or semantics for static factories on any type
 - only add a custom initializer when there is a specific need that cannot be expressed cleanly otherwise
 
 ## Data Type Property Mutability
