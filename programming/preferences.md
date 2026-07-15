@@ -133,7 +133,7 @@ applies_when:
 
 Code convention: do not build UIKit UI programmatically when Storyboard, XIB, or SwiftUI is available.
 
-Default to visual UI construction because the resulting layout is easier to inspect directly, and because splitting a UIKit screen between Interface Builder and programmatic view setup makes the screen harder to understand. For UIKit screens that already use Interface Builder, put as much static layout information in Storyboard or XIB as is reasonable. Prefer SwiftUI when the UI is self-contained enough to be hosted from UIKit.
+Default to visual UI construction because the resulting layout is easier to inspect directly, and because splitting a UIKit screen between Interface Builder and programmatic view setup makes the screen harder to understand. Prefer SwiftUI when the UI is self-contained enough to be hosted from UIKit.
 
 Programmatic UIKit view construction should be reserved for cases with a clear local reason, such as genuinely dynamic structures, imperative setup that is clearer in code, or layouts the visual UI tool cannot express cleanly. The threshold is not whether the UI is simple or complex; the default is to avoid programmatic UIKit UI unless code is the better representation.
 

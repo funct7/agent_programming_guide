@@ -53,6 +53,7 @@ rules_by_review_pass:
   - swift.prefer-keypath-function-composition
   - swiftui.button-hit-area
   - tca-sm.state-machine-file-organization
+  - uikit.interface-builder-configuration
   - uikit.visibility-state
   substantive:
   - core.domain-facts
@@ -87,6 +88,7 @@ rules_by_review_pass:
   - swift.local-constants
   - swift.empty-collection-transforms
   - swift.prefer-keypath-function-composition
+  - uikit.interface-builder-configuration
   - uikit.visibility-state
   repeated-check:
   - repeated.swift-explicit-returns
@@ -1078,6 +1080,24 @@ rules:
     - feature
     - file-layout
   source: conventions/tca-sm.md#state-machine-file-organization
+- id: uikit.interface-builder-configuration
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Configure native Storyboard and XIB properties in Interface Builder rather
+    than duplicating them in code.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - UIKit
+    - Interface Builder
+    - Storyboard
+    - XIB
+    - view-configuration
+  source: conventions/uikit.md#interface-builder-configuration
 - id: uikit.visibility-state
   tier: convention
   review_passes:
