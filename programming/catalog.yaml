@@ -26,7 +26,6 @@ usage:
 rules_by_review_pass:
   structural:
   - principle.state-machine-reducers
-  - preference.type-definitions-minimal
   - preference.split-files-for-navigation
   - preference.private-names
   - preference.extension-locality
@@ -38,6 +37,7 @@ rules_by_review_pass:
   - git.merge-policy
   - javascript.prefer-arrow-functions
   - swift.synthesize-first
+  - swift.type-definitions-minimal
   - swift.public-concrete-type-construction
   - swift.initializer-calls
   - swift.data-type-property-mutability
@@ -402,22 +402,6 @@ rules:
     - code-feedback
   tags: []
   source: principles.md#examples-are-not-rules
-- id: preference.type-definitions-minimal
-  tier: preference
-  review_passes:
-  - structural
-  summary: Keep original type declarations focused on core shape; put conformances
-    and supporting members in extensions by default.
-  applies_when:
-    constructs:
-    - type-declaration
-    - struct
-    - enum
-    - protocol-conformance
-    - nested-type
-    - initializer
-  tags: []
-  source: preferences.md#keep-type-definitions-minimal
 - id: preference.split-files-for-navigation
   tier: preference
   review_passes:
@@ -751,6 +735,23 @@ rules:
     - Equatable
     - synthesized-code
   source: conventions/swift.md#synthesize-first
+- id: swift.type-definitions-minimal
+  tier: convention
+  review_passes:
+  - structural
+  summary: Keep original type declarations focused on core shape; put conformances
+    and supporting members in extensions by default.
+  applies_when:
+    language: swift
+    constructs:
+    - type-declaration
+    - struct
+    - enum
+    - protocol-conformance
+    - nested-type
+    - initializer
+  tags: []
+  source: conventions/swift.md#keep-type-definitions-minimal
 - id: swift.public-concrete-type-construction
   tier: convention
   review_passes:

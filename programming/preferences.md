@@ -8,42 +8,6 @@ Preference entries may include `preference_strength` when Josh has chosen a nume
 - `10` is the strongest preference.
 - Omitted `preference_strength` means the preference has not been numerically ranked yet.
 
-## Keep Type Definitions Minimal
-
-```yaml
-id: preference.type-definitions-minimal
-tier: preference
-review_passes: [structural]
-summary: Keep original type declarations focused on core shape; put conformances and supporting members in extensions by default.
-applies_when:
-  constructs: [type-declaration, struct, enum, protocol-conformance, nested-type, initializer]
-```
-
-The original type declaration should show the core shape of the type:
-
-- enum cases for enums,
-- stored properties for structs,
-- nested helper types only when they are local enough to belong there.
-
-Put protocol conformances in separate extensions by default. This keeps the main type body easy to scan and groups custom conformance members with the conformance.
-
-When a protocol conformance needs explicit supporting members, put those members in the same conformance extension. Do not split a conformance declaration from its associated type aliases, required methods, or required properties.
-
-Preferred:
-
-```swift
-public extension Photoshoot {
-
-    struct Availability {
-        public let times: [LocalTime_HHmm]
-        public let sunEvent: SunEvent?
-    }
-
-}
-
-extension Photoshoot.Availability : Equatable { }
-```
-
 ## Split Files For Navigation
 
 ```yaml

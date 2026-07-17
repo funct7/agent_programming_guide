@@ -32,6 +32,45 @@ Examples of when custom code is justified:
 
 If none of those apply, prefer the synthesized form.
 
+## Keep Type Definitions Minimal
+
+```yaml
+id: swift.type-definitions-minimal
+tier: convention
+review_passes: [structural]
+summary: Keep original type declarations focused on core shape; put conformances and supporting members in extensions by default.
+applies_when:
+  language: swift
+  constructs: [type-declaration, struct, enum, protocol-conformance, nested-type, initializer]
+```
+
+The original type declaration should show the core shape of the type:
+
+- enum cases for enums,
+- stored properties for structs,
+- nested helper types only when they are local enough to belong there.
+
+Put protocol conformances in separate extensions by default. This keeps the main type body easy to scan and groups custom conformance members with the conformance.
+
+A conformance may remain on the primary declaration when it defines the type's core identity or when declaration-site conformance materially improves compiler-inferred isolation, such as SwiftUI `View`.
+
+When a protocol conformance needs explicit supporting members, put those members in the same conformance extension. Do not split a conformance declaration from its associated type aliases, required methods, or required properties.
+
+Preferred:
+
+```swift
+public extension Photoshoot {
+
+    struct Availability {
+        public let times: [LocalTime_HHmm]
+        public let sunEvent: SunEvent?
+    }
+
+}
+
+extension Photoshoot.Availability : Equatable { }
+```
+
 ## Public Concrete Type Construction
 
 ```yaml
