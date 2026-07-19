@@ -27,3 +27,12 @@ cases:
   related_rules:
   - preference.extension-locality
   source: cases/public-domain-extension-for-local-helper.md
+- id: case.transport-decoder-domain-validation
+  status: reported
+  summary: A transport decoder mixed wire-shape decoding with validation of cross-field
+    domain invariants.
+  tags: []
+  related_rules:
+  - core.domain-boundaries
+  - principle.physical-behavior-boundaries
+  source: cases/transport-decoder-domain-validation.md
