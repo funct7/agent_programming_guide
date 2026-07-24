@@ -67,3 +67,21 @@ The concern is not chaining itself or a mechanical preference for local constant
 #### Possible Promotion
 
 This incident supports clarifying `principle.physical-behavior-boundaries` rather than introducing an overlapping principle.
+
+### 2026-07-19: Set Insertion And Result Evaluation
+
+#### Context
+
+A BearSync aggregate traversal called mutating `Set.insert` directly inside an `if` or `guard` condition and immediately inspected the returned `inserted` flag.
+
+#### Feedback
+
+Josh pointed out that insertion is a command and evaluating its response is a separate decision. The mutation should be assigned to a meaningful intermediate result before control flow checks that result.
+
+#### Nuance
+
+The issue is not a mechanical ban on expressions that return values. It applies when one expression collapses a meaningful mutating command and the subsequent decision based on that command's response, obscuring the behavioral boundary.
+
+#### Possible Promotion
+
+This incident is already covered by `principle.physical-behavior-boundaries`; no additional authoritative rule is currently needed.
