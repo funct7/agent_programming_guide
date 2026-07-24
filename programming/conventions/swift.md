@@ -115,6 +115,37 @@ applies_when:
 
 Prefer `Self.init(...)` over `Self(...)` when invoking an initializer explicitly. This keeps initializer calls recognizable to Xcode/source tooling and preserves syntax highlighting. This convention does not apply to named types: continue to write `SomeType(...)`, not `SomeType.init(...)`.
 
+## Function References
+
+```yaml
+id: swift.function-references
+tier: convention
+review_passes: [structural]
+summary: Use full Swift function references, including parameter labels, when passing methods or functions by name.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [function-reference, method-reference, higher-order-function, parameter-label, factory]
+```
+
+When passing a function, method, initializer, or static factory by name, use the full Swift reference form with parameter labels.
+
+Prefer `Type.method(_:)`, `Type.method(label:)`, or `Type.method(first:second:)` over the bare base name when the reference is passed as a value, such as to `map`, `flatMap`, `compactMap`, `forEach`, or another higher-order function.
+
+This keeps overload resolution explicit, preserves the full API name at the call site, and makes the referenced function searchable.
+
+Preferred:
+
+```swift
+items.map(BookAnnotationListEntry.from(_:))
+```
+
+Avoid:
+
+```swift
+items.map(BookAnnotationListEntry.from)
+```
+
 ## Data Type Property Mutability
 
 ```yaml

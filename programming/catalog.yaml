@@ -40,6 +40,7 @@ rules_by_review_pass:
   - swift.type-definitions-minimal
   - swift.public-concrete-type-construction
   - swift.initializer-calls
+  - swift.function-references
   - swift.data-type-property-mutability
   - swift.factory-naming
   - swift.positive-boolean-naming
@@ -795,6 +796,23 @@ rules:
     - initializer-call
     - factory
   source: conventions/swift.md#initializer-calls
+- id: swift.function-references
+  tier: convention
+  review_passes:
+  - structural
+  summary: Use full Swift function references, including parameter labels, when passing
+    methods or functions by name.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - function-reference
+    - method-reference
+    - higher-order-function
+    - parameter-label
+    - factory
+  source: conventions/swift.md#function-references
 - id: swift.data-type-property-mutability
   tier: convention
   review_passes:
