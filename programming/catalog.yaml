@@ -44,6 +44,7 @@ rules_by_review_pass:
   - swift.factory-naming
   - swift.positive-boolean-naming
   - swift.early-exit-boolean-conditions
+  - swift.returning-control-flow-expressions
   - swift.helper-method-placement
   - swift.extension-body-cohesion
   - swift.explicit-existentials
@@ -82,6 +83,7 @@ rules_by_review_pass:
   - swift.data-type-property-mutability
   - swift.positive-boolean-naming
   - swift.early-exit-boolean-conditions
+  - swift.returning-control-flow-expressions
   - swift.helper-method-placement
   - swift.weak-versus-unowned
   - swift.implicitly-unwrapped-optionals
@@ -872,6 +874,26 @@ rules:
     - early-exit
     - control-flow
   source: conventions/swift.md#early-exit-boolean-conditions
+- id: swift.returning-control-flow-expressions
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Return a final single-expression switch or if-else expression as a whole
+    when preceding statements prevent implicit return.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - switch
+    - if
+    - else
+    - return
+    - function
+    - computed-property
+    - control-flow
+  source: conventions/swift.md#returning-control-flow-expressions
 - id: swift.helper-method-placement
   tier: convention
   review_passes:

@@ -20,6 +20,8 @@ In Swift functions that return a value, do not mix explicit `return` branches wi
 
 If any branch needs `return`, use `return` for every value-producing branch in that function body. Expression-only branches compile only when the surrounding function body remains a valid single-expression form.
 
+When preceding statements prevent implicit return and every branch of the final `switch` or `if`-`else` expression is a single expression, prefer returning the control-flow expression as a whole with `return switch` or `return if` instead of repeating `return` in every branch.
+
 This also applies inside a branch that has more than one statement. If a branch declares local values and then ends with a factory or conversion expression such as `.make(...)` or `.from(...)`, write `return .make(...)` or `return Type.from(...)` as appropriate. Omitting `return` there can make Swift lose the expected return context and produce misleading inference errors such as `cannot infer contextual base`.
 
 ## Misplaced Helper Methods On The Caller

@@ -194,6 +194,21 @@ Use `guard` when the condition describes a positive requirement for the code pat
 
 When a `guard` condition would need a negative expression and then invert it again through `else`, prefer an `if` statement that directly names the exit condition. This avoids double-negative control flow and keeps the early exit easier to read.
 
+## Returning Control-Flow Expressions
+
+```yaml
+id: swift.returning-control-flow-expressions
+tier: convention
+review_passes: [structural, substantive]
+summary: Return a final single-expression switch or if-else expression as a whole when preceding statements prevent implicit return.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [switch, if, else, return, function, computed-property, control-flow]
+```
+
+When a value-returning function or computed property contains preceding statements and every branch of its final `switch` or `if`-`else` expression is a single expression, return the control-flow expression as a whole with `return switch` or `return if`. Prefer this over repeating `return` in every branch. If the control-flow expression is the body's only expression, omit `return`.
+
 ## Helper Method Placement
 
 ```yaml
