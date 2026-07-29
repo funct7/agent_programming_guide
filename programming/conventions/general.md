@@ -13,6 +13,25 @@ applies_when:
 
 As a rule of thumb, group related methods and properties by the concept or responsibility they belong to. The exact grouping depends on context and is not a mechanical rule. Do not place a member in a section merely because it mentions one of that section's types when its behavior spans multiple concepts. Put cross-cutting APIs in a shared section or at the boundary where readers expect combined behavior.
 
+## Symmetric Multiline Delimiters
+
+```yaml
+id: convention.symmetric-multiline-delimiters
+tier: convention
+review_passes: [structural]
+summary: Keep multiline delimiter placement symmetric between opening and closing delimiters.
+applies_when:
+  constructs: [function-call, initializer-call, array-literal, dictionary-literal, object-literal, closure, block, multiline-expression, delimiter]
+```
+
+When parentheses, brackets, braces, or similar delimiters open a multiline expression, mirror that structure at the closing delimiter.
+
+If an opening delimiter introduces a multiline block, place the matching closing delimiter on its own line at the corresponding indentation level. Do not attach that closing delimiter to the final argument, element, or statement.
+
+When multiple opening delimiters appear on the same line, keep their matching closing delimiters together on the same line unless splitting them materially improves readability.
+
+Inline delimiters are fine when the whole expression remains inline and readable. Domain-specific formats may follow their established conventions when readability or ecosystem norms clearly favor them.
+
 ## Observable Time-Varying Values
 
 ```yaml

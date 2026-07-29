@@ -32,6 +32,7 @@ rules_by_review_pass:
   - preference.ui-construction
   - preference.enum-associated-value-labels
   - convention.semantic-member-grouping
+  - convention.symmetric-multiline-delimiters
   - git.commit-message-style
   - git.branch-policy
   - git.merge-policy
@@ -636,6 +637,25 @@ rules:
     - file-layout
   tags: []
   source: conventions/general.md#semantic-member-grouping
+- id: convention.symmetric-multiline-delimiters
+  tier: convention
+  review_passes:
+  - structural
+  summary: Keep multiline delimiter placement symmetric between opening and closing
+    delimiters.
+  applies_when:
+    constructs:
+    - function-call
+    - initializer-call
+    - array-literal
+    - dictionary-literal
+    - object-literal
+    - closure
+    - block
+    - multiline-expression
+    - delimiter
+  tags: []
+  source: conventions/general.md#symmetric-multiline-delimiters
 - id: convention.observable-time-varying-values
   tier: convention
   review_passes:

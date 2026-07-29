@@ -84,3 +84,48 @@ Use `guard` when the code below requires a positive continuation condition, espe
 ```swift
 guard let user else { return }
 ```
+
+## Symmetric Multiline Delimiters
+
+```yaml
+id: example.symmetric-multiline-delimiters
+summary: Shows closing multiline delimiters symmetrically with their opening delimiter structure.
+tags: []
+illustrates: [convention.symmetric-multiline-delimiters]
+```
+
+When an opening delimiter introduces a multiline expression, avoid attaching its closing delimiter to the last argument:
+
+```swift
+present(
+    alert,
+    animated: true)
+```
+
+Prefer placing the closing delimiter at the matching indentation level:
+
+```swift
+present(
+    alert,
+    animated: true
+)
+```
+
+When multiple opening delimiters appear on the same line, avoid splitting their matching closing delimiters without a readability reason:
+
+```swift
+let value = outer(inner(
+    first,
+    second
+)
+)
+```
+
+Prefer keeping the matching closing delimiters together:
+
+```swift
+let value = outer(inner(
+    first,
+    second
+))
+```

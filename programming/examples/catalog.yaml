@@ -17,6 +17,13 @@ examples:
   illustrates:
   - swift.early-exit-boolean-conditions
   source: examples/conventions.md#early-exit-without-double-negatives
+- id: example.symmetric-multiline-delimiters
+  summary: Shows closing multiline delimiters symmetrically with their opening delimiter
+    structure.
+  tags: []
+  illustrates:
+  - convention.symmetric-multiline-delimiters
+  source: examples/conventions.md#symmetric-multiline-delimiters
 - id: example.product-type-vs-sum-type
   summary: Shows how a product type can represent invalid states and how a sum type
     removes the invalid combinations.
