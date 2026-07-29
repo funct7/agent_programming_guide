@@ -807,7 +807,8 @@ rules:
   tier: convention
   review_passes:
   - structural
-  summary: Prefer Self.init(...) over Self(...) when invoking an initializer explicitly.
+  summary: Do not use shorthand .init(...) for initializer calls; use Self.init(...)
+    or the concrete type name.
   tags:
   - swift-lang
   applies_when:

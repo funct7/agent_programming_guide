@@ -106,14 +106,16 @@ Preferred pattern:
 id: swift.initializer-calls
 tier: convention
 review_passes: [structural]
-summary: Prefer Self.init(...) over Self(...) when invoking an initializer explicitly.
+summary: Do not use shorthand .init(...) for initializer calls; use Self.init(...) or the concrete type name.
 tags: [swift-lang]
 applies_when:
   language: swift
   constructs: [initializer-call, factory]
 ```
 
-Prefer `Self.init(...)` over `Self(...)` when invoking an initializer explicitly. This keeps initializer calls recognizable to Xcode/source tooling and preserves syntax highlighting. This convention does not apply to named types: continue to write `SomeType(...)`, not `SomeType.init(...)`.
+Do not use shorthand `.init(...)` for initializer calls. When constructing from inside the type's own body, use `Self.init(...)` if an explicit initializer call is needed. When constructing another type, use the concrete type name, such as `SomeType(...)`, so construction sites remain searchable by type name.
+
+For named types, continue to write `SomeType(...)`, not `SomeType.init(...)`.
 
 ## Function References
 
