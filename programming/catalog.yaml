@@ -32,6 +32,7 @@ rules_by_review_pass:
   - preference.ui-construction
   - preference.enum-associated-value-labels
   - convention.semantic-member-grouping
+  - convention.data-holder-mutability
   - convention.symmetric-multiline-delimiters
   - git.commit-message-style
   - git.branch-policy
@@ -81,6 +82,7 @@ rules_by_review_pass:
   - preference.ui-construction
   - preference.type-conversion-apis
   - convention.semantic-member-grouping
+  - convention.data-holder-mutability
   - convention.observable-time-varying-values
   - swift.data-type-property-mutability
   - swift.positive-boolean-naming
@@ -637,6 +639,26 @@ rules:
     - file-layout
   tags: []
   source: conventions/general.md#semantic-member-grouping
+- id: convention.data-holder-mutability
+  tier: convention
+  review_passes:
+  - structural
+  - substantive
+  summary: Default reference-type data holders to immutable state, while permitting
+    mutable value-type fields when the domain allows them to change.
+  tags:
+  - type
+  applies_when:
+    constructs:
+    - data-holder
+    - reference-type
+    - value-type
+    - class
+    - struct
+    - stored-property
+    - identity
+    - invariant
+  source: conventions/general.md#data-holder-mutability-by-type-semantics
 - id: convention.symmetric-multiline-delimiters
   tier: convention
   review_passes:
@@ -839,7 +861,7 @@ rules:
   review_passes:
   - structural
   - substantive
-  summary: For plain Swift data types, choose let or var based on whether the property
+  summary: For plain Swift value types, choose let or var based on whether the property
     is conceptually stable or normally changes.
   tags:
   - swift-lang

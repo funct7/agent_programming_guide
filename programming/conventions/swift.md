@@ -154,14 +154,14 @@ items.map(BookAnnotationListEntry.from)
 id: swift.data-type-property-mutability
 tier: convention
 review_passes: [structural, substantive]
-summary: For plain Swift data types, choose let or var based on whether the property is conceptually stable or normally changes.
+summary: For plain Swift value types, choose let or var based on whether the property is conceptually stable or normally changes.
 tags: [swift-lang, type]
 applies_when:
   language: swift
   constructs: [struct, data-type, stored-property, request, state, value-object]
 ```
 
-For plain data types with no meaningful behavior, stored property mutability should reflect the meaning of the value.
+After applying the general data-holder mutability convention, choose individual stored properties on plain Swift value types according to the meaning of each value.
 
 Use `let` when the property is conceptually stable after construction, such as identity, fixed configuration, or values that should not change as part of the type's normal lifecycle.
 

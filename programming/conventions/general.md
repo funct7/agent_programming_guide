@@ -13,6 +13,28 @@ applies_when:
 
 As a rule of thumb, group related methods and properties by the concept or responsibility they belong to. The exact grouping depends on context and is not a mechanical rule. Do not place a member in a section merely because it mentions one of that section's types when its behavior spans multiple concepts. Put cross-cutting APIs in a shared section or at the boundary where readers expect combined behavior.
 
+## Data Holder Mutability by Type Semantics
+
+```yaml
+id: convention.data-holder-mutability
+tier: convention
+review_passes: [structural, substantive]
+summary: Default reference-type data holders to immutable state, while permitting mutable value-type fields when the domain allows them to change.
+tags: [type]
+applies_when:
+  constructs: [data-holder, reference-type, value-type, class, struct, stored-property, identity, invariant]
+```
+
+For plain data holders, choose mutability using both the domain meaning of the data and the language's reference or value semantics.
+
+Stored state on a reference-type data holder should be immutable by default. Aliasing allows mutation through one reference to become visible through every other reference, bypassing the mutability of enclosing containers and making changes harder to control. Permit mutable stored state only when the domain requires it and the design establishes clear ownership or a behavior-enforcing mutation boundary. This default does not apply indiscriminately to behavior-bearing reference types whose responsibility includes managing state changes.
+
+A value-type data holder may expose mutable fields when the domain permits those fields to change freely. Mutating a nested value still requires mutable access to its enclosing value, so do not make such fields immutable merely to imitate the defensive immutability needed for aliased reference types.
+
+Identity, fixed configuration, completed snapshots, and other invariants remain immutable regardless of the type's reference or value semantics.
+
+Property-binding immutability is not necessarily transitive immutability. An immutable property that refers to a mutable object can still expose changes inside that object. Apply only the parts of this convention supported by the language's type system; languages without user-defined value types still apply the reference-type guidance.
+
 ## Symmetric Multiline Delimiters
 
 ```yaml
