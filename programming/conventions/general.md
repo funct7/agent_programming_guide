@@ -21,6 +21,7 @@ tier: convention
 review_passes: [structural, substantive]
 summary: Default reference-type data holders to immutable state, while permitting mutable value-type fields when the domain allows them to change.
 tags: [type]
+related_rules: [swift.data-type-property-mutability]
 applies_when:
   constructs: [data-holder, reference-type, value-type, class, struct, stored-property, identity, invariant]
 ```

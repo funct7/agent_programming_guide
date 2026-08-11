@@ -648,6 +648,8 @@ rules:
     mutable value-type fields when the domain allows them to change.
   tags:
   - type
+  related_rules:
+  - swift.data-type-property-mutability
   applies_when:
     constructs:
     - data-holder
@@ -866,6 +868,8 @@ rules:
   tags:
   - swift-lang
   - type
+  related_rules:
+  - convention.data-holder-mutability
   applies_when:
     language: swift
     constructs:

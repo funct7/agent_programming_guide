@@ -156,6 +156,7 @@ tier: convention
 review_passes: [structural, substantive]
 summary: For plain Swift value types, choose let or var based on whether the property is conceptually stable or normally changes.
 tags: [swift-lang, type]
+related_rules: [convention.data-holder-mutability]
 applies_when:
   language: swift
   constructs: [struct, data-type, stored-property, request, state, value-object]
