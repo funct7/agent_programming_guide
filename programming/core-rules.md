@@ -76,6 +76,7 @@ applies_when:
 Prefer London/mockist-style unit tests. A unit test should isolate the behavior under test from collaborators with meaningful behavior, and it should make the verified boundary explicit.
 
 - Test one meaningful behavior boundary at a time.
+- Do not introduce closures, protocols, or alternate constructors solely to test straightforward adapter forwarding. Prefer direct SDK ownership and test the calling logic's decisions. Adapter tests remain appropriate for meaningful transformation or failure behavior; use supported test instances or isolated real storage where useful.
 - Do not exercise a production call path just because it eventually reaches the behavior you care about.
 - Do not mix adapter behavior, transport behavior, decoding, mapping, persistence, or external-system behavior unless the test is explicitly an integration test.
 - Do not use mocks, fakes, or stubs to make an integration-shaped test look deterministic while leaving the real integration unproven.

@@ -55,6 +55,7 @@ rules_by_review_pass:
   - swift.implicitly-unwrapped-optionals
   - swift.optional-presence-binding
   - swift.prefer-keypath-function-composition
+  - swift.readable-generic-parameter-lists
   - swiftui.button-hit-area
   - tca-sm.state-machine-file-organization
   - uikit.interface-builder-configuration
@@ -1135,6 +1136,23 @@ rules:
     - keypath
     - function-composition
   source: conventions/swift.md#prefer-key-paths-and-function-composition-in-transforms
+- id: swift.readable-generic-parameter-lists
+  tier: preference
+  review_passes:
+  - structural
+  summary: Prefer a where clause when inline constraints obscure the number or names
+    of generic parameters; simple inline constraints are fine.
+  tags:
+  - swift-lang
+  applies_when:
+    language: swift
+    constructs:
+    - generic-parameter
+    - generic-constraint
+    - type-declaration
+    - function-declaration
+    - where-clause
+  source: conventions/swift.md#readable-generic-parameter-lists
 - id: swiftui.button-hit-area
   tier: convention
   review_passes:

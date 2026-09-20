@@ -425,3 +425,18 @@ applies_when:
 Prefer key-path expressions and function composition over inline anonymous closures in `map`, `flatMap`, `compactMap`, and similar transform positions when they express the operation clearly.
 
 Inline transform closures make it easy to add hidden side effects inside a transformation. If the operation is pure projection or function composition, express that directly. If the operation needs side effects, do not hide it in a transform closure.
+
+## Readable Generic Parameter Lists
+
+```yaml
+id: swift.readable-generic-parameter-lists
+tier: preference
+review_passes: [structural]
+summary: Prefer a where clause when inline constraints obscure the number or names of generic parameters; simple inline constraints are fine.
+tags: [swift-lang]
+applies_when:
+  language: swift
+  constructs: [generic-parameter, generic-constraint, type-declaration, function-declaration, where-clause]
+```
+
+Prefer a `where` clause when generic constraints obscure the type parameter list, especially with multiple parameters or several constraints. Keep parameter names easy to count and scan. Simple inline constraints are fine when the declaration remains clear. This is a readability preference, not a blanket rule against inline constraints.
